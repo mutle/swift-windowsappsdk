@@ -57,6 +57,33 @@ function Get-WinMDInputs() {
     return Get-ChildItem -Path $PackagesDir\$Id.$Version\ -Filter *.winmd -Recurse
 }
 
+function Add-WindowsPlatformGuards {
+    param(
+        [string]$ProjectDir
+    )
+
+    Get-ChildItem -Path $ProjectDir -Filter *.swift -Recurse | ForEach-Object {
+        $Content = [IO.File]::ReadAllText($_.FullName)
+        if ($Content -notmatch "(?m)^#if os\(Windows\)$") {
+            $NewLine = if ($Content.Contains("`r`n")) { "`r`n" } else { "`n" }
+            $FirstLineEnd = $Content.IndexOf($NewLine)
+            if ($FirstLineEnd -lt 0) {
+                throw "Generated Swift file is missing its header line: $($_.FullName)"
+            }
+
+            $HeaderEnd = $FirstLineEnd + $NewLine.Length
+            $Header = $Content.Substring(0, $HeaderEnd)
+            $Body = $Content.Substring($HeaderEnd).TrimEnd()
+            $GuardedContent = "$Header#if os(Windows)$NewLine$NewLine$Body$NewLine$NewLine#endif$NewLine"
+            [IO.File]::WriteAllText(
+                $_.FullName,
+                $GuardedContent,
+                [Text.UTF8Encoding]::new($false)
+            )
+        }
+    }
+}
+
 function Copy-Project {
     param(
         [string]$OutputLocation,
@@ -71,6 +98,9 @@ function Copy-Project {
             Remove-Item -Path $ProjectDir -Recurse -Force
         }
         Copy-Item -Path $OutputLocation\Sources\$ProjectName -Destination $ProjectDir -Recurse -Force
+        if ($ProjectName -ne "CWinRT") {
+            Add-WindowsPlatformGuards -ProjectDir $ProjectDir
+        }
     }
 }
 
@@ -139,7 +169,6 @@ function Copy-PackageAssets {
         [string]$PackagesDir
     )
 
-    $Arch = "x64"
     $Projections = Get-Content -Path $PSScriptRoot\projections.json | ConvertFrom-Json
     $Package = $Projections.Package.Id
     $PackageVersion = $Projections.Package.Version
@@ -147,18 +176,23 @@ function Copy-PackageAssets {
     $ProjectName = $Projections.Project
     $ProjectDir = Join-Path $PSScriptRoot "Sources\C$ProjectName\nuget"
 
-    # copy dlls from runtimes\win-<arch>\native to vendor\bin
+    # Copy each architecture's DLLs into the paths bundled by Package.swift.
     $PackageDir = Join-Path $PackagesDir "$Package.$PackageVersion"
-    $PackagesRuntimeDir = Join-Path $PackageDir "runtimes\win-$Arch\native"
-    $PackagesBinaries = Get-ChildItem -Path $PackagesRuntimeDir -Filter *.dll -Recurse
-
-    $ProjectBinaryDir = Join-Path $ProjectDir "bin"
-    if (-not (Test-Path $ProjectBinaryDir)) {
-        New-Item -Path $ProjectBinaryDir -ItemType Directory -Force | Out-Null
+    $Architectures = [ordered]@{
+        "x64" = "x86_64"
+        "arm64" = "arm64"
     }
+    $Architectures.GetEnumerator() | ForEach-Object {
+        $PackagesRuntimeDir = Join-Path $PackageDir "runtimes\win-$($_.Key)\native"
+        $PackagesBinaries = Get-ChildItem -Path $PackagesRuntimeDir -Filter *.dll -Recurse
+        $ProjectBinaryDir = Join-Path $ProjectDir "bin\$($_.Value)"
+        if (-not (Test-Path $ProjectBinaryDir)) {
+            New-Item -Path $ProjectBinaryDir -ItemType Directory -Force | Out-Null
+        }
 
-    $PackagesBinaries | ForEach-Object {
-        Copy-Item -Path $_.FullName -Destination $ProjectBinaryDir -Force
+        $PackagesBinaries | ForEach-Object {
+            Copy-Item -Path $_.FullName -Destination $ProjectBinaryDir -Force
+        }
     }
 
     # copy headers from include to vendor\include

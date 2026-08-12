@@ -1,3 +1,5 @@
+#if defined(_WIN32)
+
 #include <wtypesbase.h>
 #include <minwindef.h>
 #include <winnt.h>
@@ -24,3 +26,5 @@ FARPROC WINAPI delayHook(unsigned dliNotify, PDelayLoadInfo pdli)
 
 const PfnDliHook __pfnDliNotifyHook2 = delayHook;
 const PfnDliHook __pfnDliFailureHook2 = delayHook;
+
+#endif

@@ -1,3 +1,5 @@
+#if os(Windows)
+
 import CWinRT
 import CWinAppSDK
 import WindowsFoundation
@@ -27,7 +29,13 @@ public class WindowsAppRuntimeInitializer {
     // TODO: Figure out how to properly link against delayimp.lib so that we can delay load the bootstrap dll.
     private typealias pfnMddBootstrapInitialize2 = @convention(c) (UInt32, PCWSTR?, PACKAGE_VERSION, MddBootstrapInitializeOptions) -> HRESULT
     private typealias pfnMddBootstrapShutdown = @convention(c) () -> Void
-    private let bootsrapperDll = LoadLibraryA("swift-windowsappsdk_CWinAppSDK.resources\\Microsoft.WindowsAppRuntime.Bootstrap.dll")
+    #if arch(x86_64)
+    private let bootsrapperDll = LoadLibraryA("swift-windowsappsdk_CWinAppSDK.resources\\bin\\x86_64\\Microsoft.WindowsAppRuntime.Bootstrap.dll")
+    #elseif arch(arm64)
+    private let bootsrapperDll = LoadLibraryA("swift-windowsappsdk_CWinAppSDK.resources\\bin\\arm64\\Microsoft.WindowsAppRuntime.Bootstrap.dll")
+    #else
+    #error("Unsupported Windows architecture")
+    #endif
 
     private lazy var Initialize: pfnMddBootstrapInitialize2 = {
         let pfn = GetProcAddress(bootsrapperDll, "MddBootstrapInitialize2")
@@ -76,3 +84,5 @@ public class WindowsAppRuntimeInitializer {
         FreeLibrary(bootsrapperDll)
     }
 }
+
+#endif
