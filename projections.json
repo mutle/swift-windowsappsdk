@@ -23,7 +23,9 @@
     "Microsoft.UI.Windowing.OverlappedPresenter",
     "Microsoft.Windows.ApplicationModel.Resources.ResourceManager",
     "Microsoft.Windows.AppLifecycle.ActivationRegistrationManager",
-    "Microsoft.Windows.AppLifecycle.AppInstance"
+    "Microsoft.Windows.AppLifecycle.AppInstance",
+    "Microsoft.Windows.AppNotifications",
+    "Microsoft.Windows.AppNotifications.Builder"
   ],
   "exclude": [
   ]

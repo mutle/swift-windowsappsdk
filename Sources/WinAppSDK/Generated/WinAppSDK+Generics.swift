@@ -58,6 +58,108 @@ internal class __x_ABI_C__FIAsyncOperationCompletedHandler_1___x_ABI_CMicrosoft_
         return handler
     }
 }
+private var IID___x_ABI_C__FIAsyncOperationCompletedHandler_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationProgressResult: WindowsFoundation.IID {
+    .init(Data1: 0x566f5620, Data2: 0xc1d5, Data3: 0x526f, Data4: ( 0xa8,0x98,0xba,0x7d,0x0d,0xa3,0xa5,0x6d ))// 566f5620-c1d5-526f-a898-ba7d0da3a56d
+}
+
+internal extension WinRTDelegateBridge where CABI == __x_ABI_C__FIAsyncOperationCompletedHandler_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationProgressResult {
+    static func makeAbi() -> CABI {
+        let vtblPtr = withUnsafeMutablePointer(to: &WinAppSDK.__x_ABI_C__FIAsyncOperationCompletedHandler_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationProgressResultVTable) { $0 }
+        return .init(lpVtbl:vtblPtr)
+    }
+}
+
+internal var __x_ABI_C__FIAsyncOperationCompletedHandler_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationProgressResultVTable: __x_ABI_C__FIAsyncOperationCompletedHandler_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationProgressResultVtbl = .init(
+    QueryInterface: { __x_ABI_C__FIAsyncOperationCompletedHandler_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationProgressResultWrapper.queryInterface($0, $1, $2) },
+    AddRef: { __x_ABI_C__FIAsyncOperationCompletedHandler_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationProgressResultWrapper.addRef($0) },
+    Release: { __x_ABI_C__FIAsyncOperationCompletedHandler_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationProgressResultWrapper.release($0) },
+    Invoke: {
+        guard let __unwrapped__instance = __x_ABI_C__FIAsyncOperationCompletedHandler_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationProgressResultWrapper.tryUnwrapFrom(raw: $0) else { return E_INVALIDARG }
+        let asyncInfo: WindowsFoundation.AnyIAsyncOperation<WinAppSDK.AppNotificationProgressResult>? = WinAppSDK.__x_ABI_C__FIAsyncOperation_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationProgressResultWrapper.unwrapFrom(abi: ComPtr($1))
+        let asyncStatus: WindowsFoundation.AsyncStatus = $2
+        __unwrapped__instance(asyncInfo, asyncStatus)
+        return S_OK
+    }
+)
+typealias __x_ABI_C__FIAsyncOperationCompletedHandler_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationProgressResultWrapper = InterfaceWrapperBase<WinAppSDK.__x_ABI_C__FIAsyncOperationCompletedHandler_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationProgressResultBridge>
+internal class AsyncOperationCompletedHandlerAppNotificationProgressResult: WindowsFoundation.IUnknown {
+    override public class var IID: WindowsFoundation.IID { IID___x_ABI_C__FIAsyncOperationCompletedHandler_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationProgressResult }
+
+    internal func InvokeImpl(_ asyncInfo: WindowsFoundation.AnyIAsyncOperation<WinAppSDK.AppNotificationProgressResult>?, _ asyncStatus: WindowsFoundation.AsyncStatus) throws {
+        let asyncInfoWrapper = WinAppSDK.__x_ABI_C__FIAsyncOperation_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationProgressResultWrapper(asyncInfo)
+        let _asyncInfo = try! asyncInfoWrapper?.toABI { $0 }
+        _ = try perform(as: __x_ABI_C__FIAsyncOperationCompletedHandler_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationProgressResult.self) { pThis in
+            try CHECKED(pThis.pointee.lpVtbl.pointee.Invoke(pThis, _asyncInfo, asyncStatus))
+        }
+    }
+
+}
+
+internal class __x_ABI_C__FIAsyncOperationCompletedHandler_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationProgressResultBridge : WinRTDelegateBridge {
+    internal typealias Handler = WindowsFoundation.AsyncOperationCompletedHandler<WinAppSDK.AppNotificationProgressResult>
+    internal typealias CABI = __x_ABI_C__FIAsyncOperationCompletedHandler_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationProgressResult
+    internal typealias SwiftABI = WinAppSDK.AsyncOperationCompletedHandlerAppNotificationProgressResult
+
+    internal static func from(abi: ComPtr<CABI>?) -> Handler? {
+        guard let abi = abi else { return nil }
+        let _default = SwiftABI(abi)
+        let handler: Handler = { (asyncInfo, asyncStatus) in
+            try! _default.InvokeImpl(asyncInfo, asyncStatus)
+        }
+        return handler
+    }
+}
+private var IID___x_ABI_C__FIAsyncOperationCompletedHandler_1___x_ABI_C__FIVector_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotification: WindowsFoundation.IID {
+    .init(Data1: 0xfc00bf73, Data2: 0xae70, Data3: 0x537b, Data4: ( 0xa7,0x02,0xa8,0x5a,0x20,0xbb,0xd7,0x14 ))// fc00bf73-ae70-537b-a702-a85a20bbd714
+}
+
+internal extension WinRTDelegateBridge where CABI == __x_ABI_C__FIAsyncOperationCompletedHandler_1___x_ABI_C__FIVector_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotification {
+    static func makeAbi() -> CABI {
+        let vtblPtr = withUnsafeMutablePointer(to: &WinAppSDK.__x_ABI_C__FIAsyncOperationCompletedHandler_1___x_ABI_C__FIVector_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationVTable) { $0 }
+        return .init(lpVtbl:vtblPtr)
+    }
+}
+
+internal var __x_ABI_C__FIAsyncOperationCompletedHandler_1___x_ABI_C__FIVector_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationVTable: __x_ABI_C__FIAsyncOperationCompletedHandler_1___x_ABI_C__FIVector_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationVtbl = .init(
+    QueryInterface: { __x_ABI_C__FIAsyncOperationCompletedHandler_1___x_ABI_C__FIVector_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationWrapper.queryInterface($0, $1, $2) },
+    AddRef: { __x_ABI_C__FIAsyncOperationCompletedHandler_1___x_ABI_C__FIVector_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationWrapper.addRef($0) },
+    Release: { __x_ABI_C__FIAsyncOperationCompletedHandler_1___x_ABI_C__FIVector_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationWrapper.release($0) },
+    Invoke: {
+        guard let __unwrapped__instance = __x_ABI_C__FIAsyncOperationCompletedHandler_1___x_ABI_C__FIVector_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationWrapper.tryUnwrapFrom(raw: $0) else { return E_INVALIDARG }
+        let asyncInfo: WindowsFoundation.AnyIAsyncOperation<WindowsFoundation.AnyIVector<WinAppSDK.AppNotification?>?>? = WinAppSDK.__x_ABI_C__FIAsyncOperation_1___x_ABI_C__FIVector_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationWrapper.unwrapFrom(abi: ComPtr($1))
+        let asyncStatus: WindowsFoundation.AsyncStatus = $2
+        __unwrapped__instance(asyncInfo, asyncStatus)
+        return S_OK
+    }
+)
+typealias __x_ABI_C__FIAsyncOperationCompletedHandler_1___x_ABI_C__FIVector_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationWrapper = InterfaceWrapperBase<WinAppSDK.__x_ABI_C__FIAsyncOperationCompletedHandler_1___x_ABI_C__FIVector_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationBridge>
+internal class AsyncOperationCompletedHandlerIVectorAppNotification: WindowsFoundation.IUnknown {
+    override public class var IID: WindowsFoundation.IID { IID___x_ABI_C__FIAsyncOperationCompletedHandler_1___x_ABI_C__FIVector_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotification }
+
+    internal func InvokeImpl(_ asyncInfo: WindowsFoundation.AnyIAsyncOperation<WindowsFoundation.AnyIVector<WinAppSDK.AppNotification?>?>?, _ asyncStatus: WindowsFoundation.AsyncStatus) throws {
+        let asyncInfoWrapper = WinAppSDK.__x_ABI_C__FIAsyncOperation_1___x_ABI_C__FIVector_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationWrapper(asyncInfo)
+        let _asyncInfo = try! asyncInfoWrapper?.toABI { $0 }
+        _ = try perform(as: __x_ABI_C__FIAsyncOperationCompletedHandler_1___x_ABI_C__FIVector_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotification.self) { pThis in
+            try CHECKED(pThis.pointee.lpVtbl.pointee.Invoke(pThis, _asyncInfo, asyncStatus))
+        }
+    }
+
+}
+
+internal class __x_ABI_C__FIAsyncOperationCompletedHandler_1___x_ABI_C__FIVector_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationBridge : WinRTDelegateBridge {
+    internal typealias Handler = WindowsFoundation.AsyncOperationCompletedHandler<WindowsFoundation.AnyIVector<WinAppSDK.AppNotification?>?>
+    internal typealias CABI = __x_ABI_C__FIAsyncOperationCompletedHandler_1___x_ABI_C__FIVector_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotification
+    internal typealias SwiftABI = WinAppSDK.AsyncOperationCompletedHandlerIVectorAppNotification
+
+    internal static func from(abi: ComPtr<CABI>?) -> Handler? {
+        guard let abi = abi else { return nil }
+        let _default = SwiftABI(abi)
+        let handler: Handler = { (asyncInfo, asyncStatus) in
+            try! _default.InvokeImpl(asyncInfo, asyncStatus)
+        }
+        return handler
+    }
+}
 private var IID___x_ABI_C__FIIterable_1_float: WindowsFoundation.IID {
     .init(Data1: 0xb01bee51, Data2: 0x063a, Data3: 0x5fda, Data4: ( 0xbd,0x72,0xd7,0x66,0x37,0xbb,0x8c,0xb8 ))// b01bee51-063a-5fda-bd72-d76637bb8cb8
 }
@@ -1270,6 +1372,93 @@ fileprivate class __x_ABI_C__FIIterable_1___x_ABI_CMicrosoft__CWindows__CAppLife
     // MARK: WinRT
     /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.foundation.collections.iiterable-1.first)
     fileprivate func first() -> WindowsFoundation.AnyIIterator<WinAppSDK.AppInstance?>? {
+        try! _default.FirstImpl()
+    }
+
+    public func queryInterface(_ iid: WindowsFoundation.IID) -> IUnknownRef? { nil }
+}
+
+private var IID___x_ABI_C__FIIterable_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotification: WindowsFoundation.IID {
+    .init(Data1: 0xb6fdba11, Data2: 0x96fd, Data3: 0x5160, Data4: ( 0xb2,0x82,0x52,0xa3,0x93,0x82,0x3d,0x51 ))// b6fdba11-96fd-5160-b282-52a393823d51
+}
+
+internal var __x_ABI_C__FIIterable_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationVTable: __x_ABI_C__FIIterable_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationVtbl = .init(
+    QueryInterface: { __x_ABI_C__FIIterable_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationWrapper.queryInterface($0, $1, $2) },
+    AddRef: { __x_ABI_C__FIIterable_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationWrapper.addRef($0) },
+    Release: { __x_ABI_C__FIIterable_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationWrapper.release($0) },
+    GetIids: {
+        let size = MemoryLayout<WindowsFoundation.IID>.size
+        let iids = CoTaskMemAlloc(UInt64(size) * 3).assumingMemoryBound(to: WindowsFoundation.IID.self)
+        iids[0] = IUnknown.IID
+        iids[1] = IInspectable.IID
+        iids[2] = WinAppSDK.__x_ABI_C__FIIterable_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationWrapper.IID
+        $1!.pointee = 3
+        $2!.pointee = iids
+        return S_OK
+    },
+
+    GetRuntimeClassName: {
+        _ = $0
+        let hstring = try! HString("Windows.Foundation.Collections.IIterable`1<Microsoft.Windows.AppNotifications.AppNotification>").detach()
+        $1!.pointee = hstring
+        return S_OK
+    },
+
+    GetTrustLevel: {
+        _ = $0
+        $1!.pointee = TrustLevel(rawValue: 0)
+        return S_OK
+    },
+
+    First: {
+        guard let __unwrapped__instance = __x_ABI_C__FIIterable_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationWrapper.tryUnwrapFrom(raw: $0) else { return E_INVALIDARG }
+        let result = __unwrapped__instance.first()
+        let resultWrapper = WinAppSDK.__x_ABI_C__FIIterator_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationWrapper(result)
+        resultWrapper?.copyTo($1)
+        return S_OK
+    }
+)
+typealias __x_ABI_C__FIIterable_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationWrapper = InterfaceWrapperBase<WinAppSDK.__x_ABI_C__FIIterable_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationBridge>
+internal class IIterableAppNotification: WindowsFoundation.IInspectable {
+    override public class var IID: WindowsFoundation.IID { IID___x_ABI_C__FIIterable_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotification }
+
+    internal func FirstImpl() throws -> WindowsFoundation.AnyIIterator<WinAppSDK.AppNotification?>? {
+        let (result) = try ComPtrs.initialize { resultAbi in
+            _ = try perform(as: __x_ABI_C__FIIterable_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotification.self) { pThis in
+                try CHECKED(pThis.pointee.lpVtbl.pointee.First(pThis, &resultAbi))
+            }
+        }
+        return WinAppSDK.__x_ABI_C__FIIterator_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationWrapper.unwrapFrom(abi: result)
+    }
+
+}
+
+internal enum __x_ABI_C__FIIterable_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationBridge : AbiInterfaceBridge {
+    internal typealias CABI = __x_ABI_C__FIIterable_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotification
+    internal typealias SwiftABI = IIterableAppNotification
+    internal typealias SwiftProjection = WindowsFoundation.AnyIIterable<WinAppSDK.AppNotification?>
+    internal static func from(abi: ComPtr<CABI>?) -> SwiftProjection? {
+        guard let abi = abi else { return nil }
+        return __x_ABI_C__FIIterable_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationImpl(abi)
+    }
+
+    internal static func makeAbi() -> CABI {
+        let vtblPtr = withUnsafeMutablePointer(to: &__x_ABI_C__FIIterable_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationVTable) { $0 }
+        return .init(lpVtbl: vtblPtr)
+    }
+}
+
+fileprivate class __x_ABI_C__FIIterable_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationImpl : IIterable, AbiInterfaceImpl {
+    typealias T = WinAppSDK.AppNotification?
+    typealias Bridge = __x_ABI_C__FIIterable_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationBridge
+    let _default: Bridge.SwiftABI
+    init(_ fromAbi: ComPtr<Bridge.CABI>) {
+        _default = Bridge.SwiftABI(fromAbi)
+    }
+
+    // MARK: WinRT
+    /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.foundation.collections.iiterable-1.first)
+    fileprivate func first() -> WindowsFoundation.AnyIIterator<WinAppSDK.AppNotification?>? {
         try! _default.FirstImpl()
     }
 
@@ -3318,6 +3507,134 @@ fileprivate class __x_ABI_C__FIIterator_1___x_ABI_CMicrosoft__CWindows__CAppLife
 
     /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.foundation.collections.iiterator-1.current)
     fileprivate var current : WinAppSDK.AppInstance? {
+        get { try! _default.get_CurrentImpl() }
+    }
+
+    /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.foundation.collections.iiterator-1.hascurrent)
+    fileprivate var hasCurrent : Bool {
+        get { try! _default.get_HasCurrentImpl() }
+    }
+
+    public func queryInterface(_ iid: WindowsFoundation.IID) -> IUnknownRef? { nil }
+}
+
+private var IID___x_ABI_C__FIIterator_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotification: WindowsFoundation.IID {
+    .init(Data1: 0x450e1195, Data2: 0x001f, Data3: 0x58ff, Data4: ( 0xa6,0x52,0xaa,0xbd,0x9b,0xcd,0xa5,0xc0 ))// 450e1195-001f-58ff-a652-aabd9bcda5c0
+}
+
+internal var __x_ABI_C__FIIterator_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationVTable: __x_ABI_C__FIIterator_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationVtbl = .init(
+    QueryInterface: { __x_ABI_C__FIIterator_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationWrapper.queryInterface($0, $1, $2) },
+    AddRef: { __x_ABI_C__FIIterator_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationWrapper.addRef($0) },
+    Release: { __x_ABI_C__FIIterator_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationWrapper.release($0) },
+    GetIids: {
+        let size = MemoryLayout<WindowsFoundation.IID>.size
+        let iids = CoTaskMemAlloc(UInt64(size) * 3).assumingMemoryBound(to: WindowsFoundation.IID.self)
+        iids[0] = IUnknown.IID
+        iids[1] = IInspectable.IID
+        iids[2] = WinAppSDK.__x_ABI_C__FIIterator_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationWrapper.IID
+        $1!.pointee = 3
+        $2!.pointee = iids
+        return S_OK
+    },
+
+    GetRuntimeClassName: {
+        _ = $0
+        let hstring = try! HString("Windows.Foundation.Collections.IIterator`1<Microsoft.Windows.AppNotifications.AppNotification>").detach()
+        $1!.pointee = hstring
+        return S_OK
+    },
+
+    GetTrustLevel: {
+        _ = $0
+        $1!.pointee = TrustLevel(rawValue: 0)
+        return S_OK
+    },
+
+    get_Current: {
+        guard let __unwrapped__instance = __x_ABI_C__FIIterator_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationWrapper.tryUnwrapFrom(raw: $0) else { return E_INVALIDARG }
+        let result = __unwrapped__instance.current
+        result?.copyTo($1)
+        return S_OK
+    },
+
+    get_HasCurrent: {
+        guard let __unwrapped__instance = __x_ABI_C__FIIterator_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationWrapper.tryUnwrapFrom(raw: $0) else { return E_INVALIDARG }
+        let result = __unwrapped__instance.hasCurrent
+        $1?.initialize(to: .init(from: result))
+        return S_OK
+    },
+
+    MoveNext: {
+        guard let __unwrapped__instance = __x_ABI_C__FIIterator_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationWrapper.tryUnwrapFrom(raw: $0) else { return E_INVALIDARG }
+        let result = __unwrapped__instance.moveNext()
+        $1?.initialize(to: .init(from: result))
+        return S_OK
+    },
+
+    GetMany: { _, _, _, _ in return failWith(err: E_NOTIMPL) }
+)
+typealias __x_ABI_C__FIIterator_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationWrapper = InterfaceWrapperBase<WinAppSDK.__x_ABI_C__FIIterator_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationBridge>
+internal class IIteratorAppNotification: WindowsFoundation.IInspectable {
+    override public class var IID: WindowsFoundation.IID { IID___x_ABI_C__FIIterator_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotification }
+
+    internal func get_CurrentImpl() throws -> WinAppSDK.AppNotification? {
+        let (result) = try ComPtrs.initialize { resultAbi in
+            _ = try perform(as: __x_ABI_C__FIIterator_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotification.self) { pThis in
+                try CHECKED(pThis.pointee.lpVtbl.pointee.get_Current(pThis, &resultAbi))
+            }
+        }
+        return .from(abi: result)
+    }
+
+    internal func get_HasCurrentImpl() throws -> Bool {
+        var result: boolean = 0
+        _ = try perform(as: __x_ABI_C__FIIterator_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotification.self) { pThis in
+            try CHECKED(pThis.pointee.lpVtbl.pointee.get_HasCurrent(pThis, &result))
+        }
+        return .init(from: result)
+    }
+
+    internal func MoveNextImpl() throws -> Bool {
+        var result: boolean = 0
+        _ = try perform(as: __x_ABI_C__FIIterator_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotification.self) { pThis in
+            try CHECKED(pThis.pointee.lpVtbl.pointee.MoveNext(pThis, &result))
+        }
+        return .init(from: result)
+    }
+
+}
+
+internal enum __x_ABI_C__FIIterator_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationBridge : AbiInterfaceBridge {
+    internal typealias CABI = __x_ABI_C__FIIterator_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotification
+    internal typealias SwiftABI = IIteratorAppNotification
+    internal typealias SwiftProjection = WindowsFoundation.AnyIIterator<WinAppSDK.AppNotification?>
+    internal static func from(abi: ComPtr<CABI>?) -> SwiftProjection? {
+        guard let abi = abi else { return nil }
+        return __x_ABI_C__FIIterator_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationImpl(abi)
+    }
+
+    internal static func makeAbi() -> CABI {
+        let vtblPtr = withUnsafeMutablePointer(to: &__x_ABI_C__FIIterator_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationVTable) { $0 }
+        return .init(lpVtbl: vtblPtr)
+    }
+}
+
+fileprivate class __x_ABI_C__FIIterator_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationImpl : IIterator, AbiInterfaceImpl {
+    typealias T = WinAppSDK.AppNotification?
+    typealias Bridge = __x_ABI_C__FIIterator_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationBridge
+    let _default: Bridge.SwiftABI
+    init(_ fromAbi: ComPtr<Bridge.CABI>) {
+        _default = Bridge.SwiftABI(fromAbi)
+    }
+
+    // MARK: WinRT
+    /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.foundation.collections.iiterator-1.movenext)
+    fileprivate func moveNext() -> Bool {
+        try! _default.MoveNextImpl()
+    }
+
+    /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.foundation.collections.iiterator-1.current)
+    fileprivate var current : WinAppSDK.AppNotification? {
         get { try! _default.get_CurrentImpl() }
     }
 
@@ -5769,6 +6086,166 @@ fileprivate class __x_ABI_C__FIVectorView_1___x_ABI_CMicrosoft__CWindows__CAppLi
     public func queryInterface(_ iid: WindowsFoundation.IID) -> IUnknownRef? { nil }
 }
 
+private var IID___x_ABI_C__FIVectorView_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotification: WindowsFoundation.IID {
+    .init(Data1: 0xe645c6bd, Data2: 0xe8e3, Data3: 0x5b12, Data4: ( 0x8b,0x95,0x96,0x3b,0xac,0x29,0xf9,0x74 ))// e645c6bd-e8e3-5b12-8b95-963bac29f974
+}
+
+internal var __x_ABI_C__FIVectorView_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationVTable: __x_ABI_C__FIVectorView_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationVtbl = .init(
+    QueryInterface: { __x_ABI_C__FIVectorView_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationWrapper.queryInterface($0, $1, $2) },
+    AddRef: { __x_ABI_C__FIVectorView_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationWrapper.addRef($0) },
+    Release: { __x_ABI_C__FIVectorView_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationWrapper.release($0) },
+    GetIids: {
+        let size = MemoryLayout<WindowsFoundation.IID>.size
+        let iids = CoTaskMemAlloc(UInt64(size) * 4).assumingMemoryBound(to: WindowsFoundation.IID.self)
+        iids[0] = IUnknown.IID
+        iids[1] = IInspectable.IID
+        iids[2] = WinAppSDK.__x_ABI_C__FIVectorView_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationWrapper.IID
+        iids[3] = WinAppSDK.__x_ABI_C__FIIterable_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationWrapper.IID
+        $1!.pointee = 4
+        $2!.pointee = iids
+        return S_OK
+    },
+
+    GetRuntimeClassName: {
+        _ = $0
+        let hstring = try! HString("Windows.Foundation.Collections.IVectorView`1<Microsoft.Windows.AppNotifications.AppNotification>").detach()
+        $1!.pointee = hstring
+        return S_OK
+    },
+
+    GetTrustLevel: {
+        _ = $0
+        $1!.pointee = TrustLevel(rawValue: 0)
+        return S_OK
+    },
+
+    GetAt: {
+        guard let __unwrapped__instance = __x_ABI_C__FIVectorView_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationWrapper.tryUnwrapFrom(raw: $0) else { return E_INVALIDARG }
+        let index: UInt32 = $1
+        let result = __unwrapped__instance.getAt(index)
+        result?.copyTo($2)
+        return S_OK
+    },
+
+    get_Size: {
+        guard let __unwrapped__instance = __x_ABI_C__FIVectorView_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationWrapper.tryUnwrapFrom(raw: $0) else { return E_INVALIDARG }
+        let result = __unwrapped__instance.size
+        $1?.initialize(to: result)
+        return S_OK
+    },
+
+    IndexOf: {
+        guard let __unwrapped__instance = __x_ABI_C__FIVectorView_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationWrapper.tryUnwrapFrom(raw: $0) else { return E_INVALIDARG }
+        let value: WinAppSDK.AppNotification? = .from(abi: ComPtr($1))
+        var index: UInt32 = 0
+        let result = __unwrapped__instance.indexOf(value, &index)
+        $2?.initialize(to: index)
+        $3?.initialize(to: .init(from: result))
+        return S_OK
+    },
+
+    GetMany: { _, _, _, _, _ in return failWith(err: E_NOTIMPL) }
+)
+typealias __x_ABI_C__FIVectorView_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationWrapper = InterfaceWrapperBase<WinAppSDK.__x_ABI_C__FIVectorView_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationBridge>
+internal class IVectorViewAppNotification: WindowsFoundation.IInspectable {
+    override public class var IID: WindowsFoundation.IID { IID___x_ABI_C__FIVectorView_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotification }
+
+    internal func GetAtImpl(_ index: UInt32) throws -> WinAppSDK.AppNotification? {
+        let (result) = try ComPtrs.initialize { resultAbi in
+            _ = try perform(as: __x_ABI_C__FIVectorView_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotification.self) { pThis in
+                try CHECKED(pThis.pointee.lpVtbl.pointee.GetAt(pThis, index, &resultAbi))
+            }
+        }
+        return .from(abi: result)
+    }
+
+    internal func get_SizeImpl() throws -> UInt32 {
+        var result: UINT32 = 0
+        _ = try perform(as: __x_ABI_C__FIVectorView_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotification.self) { pThis in
+            try CHECKED(pThis.pointee.lpVtbl.pointee.get_Size(pThis, &result))
+        }
+        return result
+    }
+
+    internal func IndexOfImpl(_ value: WinAppSDK.AppNotification?, _ index: inout UInt32) throws -> Bool {
+        var result: boolean = 0
+        _ = try perform(as: __x_ABI_C__FIVectorView_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotification.self) { pThis in
+            try CHECKED(pThis.pointee.lpVtbl.pointee.IndexOf(pThis, RawPointer(value), &index, &result))
+        }
+        return .init(from: result)
+    }
+
+}
+
+internal enum __x_ABI_C__FIVectorView_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationBridge : AbiInterfaceBridge {
+    internal typealias CABI = __x_ABI_C__FIVectorView_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotification
+    internal typealias SwiftABI = IVectorViewAppNotification
+    internal typealias SwiftProjection = WindowsFoundation.AnyIVectorView<WinAppSDK.AppNotification?>
+    internal static func from(abi: ComPtr<CABI>?) -> SwiftProjection? {
+        guard let abi = abi else { return nil }
+        return __x_ABI_C__FIVectorView_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationImpl(abi)
+    }
+
+    internal static func makeAbi() -> CABI {
+        let vtblPtr = withUnsafeMutablePointer(to: &__x_ABI_C__FIVectorView_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationVTable) { $0 }
+        return .init(lpVtbl: vtblPtr)
+    }
+}
+
+fileprivate class __x_ABI_C__FIVectorView_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationImpl : IVectorView, AbiInterfaceImpl {
+    typealias T = WinAppSDK.AppNotification?
+    typealias Bridge = __x_ABI_C__FIVectorView_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationBridge
+    let _default: Bridge.SwiftABI
+    init(_ fromAbi: ComPtr<Bridge.CABI>) {
+        _default = Bridge.SwiftABI(fromAbi)
+    }
+
+    // MARK: Collection
+    typealias Element = T
+    var startIndex: Int { 0 }
+    var endIndex: Int { Int(size) }
+    func index(after i: Int) -> Int {
+        i+1
+    }
+
+    func index(of: Element) -> Int? {
+        var index: UInt32 = 0
+        let result = indexOf(of, &index)
+        guard result else { return nil }
+        return Int(index)
+    }
+    var count: Int { Int(size) }
+
+    subscript(position: Int) -> Element {
+        get {
+            getAt(UInt32(position))
+        }
+    }
+    // MARK: WinRT
+    /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.foundation.collections.ivectorview-1.getat)
+    fileprivate func getAt(_ index: UInt32) -> WinAppSDK.AppNotification? {
+        try! _default.GetAtImpl(index)
+    }
+
+    /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.foundation.collections.ivectorview-1.indexof)
+    fileprivate func indexOf(_ value: WinAppSDK.AppNotification?, _ index: inout UInt32) -> Bool {
+        try! _default.IndexOfImpl(value, &index)
+    }
+
+    /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.foundation.collections.ivectorview-1.size)
+    fileprivate var size : UInt32 {
+        get { try! _default.get_SizeImpl() }
+    }
+
+    private lazy var _IIterable: IIterableAppNotification! = getInterfaceForCaching()
+    /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.foundation.collections.ivectorview-1.first)
+    fileprivate func first() -> WindowsFoundation.AnyIIterator<WinAppSDK.AppNotification?>? {
+        try! _IIterable.FirstImpl()
+    }
+
+    public func queryInterface(_ iid: WindowsFoundation.IID) -> IUnknownRef? { nil }
+}
+
 private var IID___x_ABI_C__FIVector_1_float: WindowsFoundation.IID {
     .init(Data1: 0x61cf693f, Data2: 0xdb4c, Data3: 0x579f, Data4: ( 0xb9,0x05,0x5d,0xd3,0xd2,0x3c,0xfd,0x4d ))// 61cf693f-db4c-579f-b905-5dd3d23cfd4d
 }
@@ -7273,6 +7750,307 @@ fileprivate class __x_ABI_C__FIVector_1___x_ABI_CMicrosoft__CWindows__CAppLifecy
     public func queryInterface(_ iid: WindowsFoundation.IID) -> IUnknownRef? { nil }
 }
 
+private var IID___x_ABI_C__FIVector_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotification: WindowsFoundation.IID {
+    .init(Data1: 0xde618ddb, Data2: 0xbebc, Data3: 0x5c93, Data4: ( 0x91,0xfe,0xeb,0xd8,0x90,0xdf,0x7c,0xb7 ))// de618ddb-bebc-5c93-91fe-ebd890df7cb7
+}
+
+internal var __x_ABI_C__FIVector_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationVTable: __x_ABI_C__FIVector_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationVtbl = .init(
+    QueryInterface: { __x_ABI_C__FIVector_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationWrapper.queryInterface($0, $1, $2) },
+    AddRef: { __x_ABI_C__FIVector_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationWrapper.addRef($0) },
+    Release: { __x_ABI_C__FIVector_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationWrapper.release($0) },
+    GetIids: {
+        let size = MemoryLayout<WindowsFoundation.IID>.size
+        let iids = CoTaskMemAlloc(UInt64(size) * 4).assumingMemoryBound(to: WindowsFoundation.IID.self)
+        iids[0] = IUnknown.IID
+        iids[1] = IInspectable.IID
+        iids[2] = WinAppSDK.__x_ABI_C__FIVector_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationWrapper.IID
+        iids[3] = WinAppSDK.__x_ABI_C__FIIterable_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationWrapper.IID
+        $1!.pointee = 4
+        $2!.pointee = iids
+        return S_OK
+    },
+
+    GetRuntimeClassName: {
+        _ = $0
+        let hstring = try! HString("Windows.Foundation.Collections.IVector`1<Microsoft.Windows.AppNotifications.AppNotification>").detach()
+        $1!.pointee = hstring
+        return S_OK
+    },
+
+    GetTrustLevel: {
+        _ = $0
+        $1!.pointee = TrustLevel(rawValue: 0)
+        return S_OK
+    },
+
+    GetAt: {
+        guard let __unwrapped__instance = __x_ABI_C__FIVector_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationWrapper.tryUnwrapFrom(raw: $0) else { return E_INVALIDARG }
+        let index: UInt32 = $1
+        let result = __unwrapped__instance.getAt(index)
+        result?.copyTo($2)
+        return S_OK
+    },
+
+    get_Size: {
+        guard let __unwrapped__instance = __x_ABI_C__FIVector_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationWrapper.tryUnwrapFrom(raw: $0) else { return E_INVALIDARG }
+        let result = __unwrapped__instance.size
+        $1?.initialize(to: result)
+        return S_OK
+    },
+
+    GetView: {
+        guard let __unwrapped__instance = __x_ABI_C__FIVector_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationWrapper.tryUnwrapFrom(raw: $0) else { return E_INVALIDARG }
+        let result = __unwrapped__instance.getView()
+        let resultWrapper = WinAppSDK.__x_ABI_C__FIVectorView_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationWrapper(result)
+        resultWrapper?.copyTo($1)
+        return S_OK
+    },
+
+    IndexOf: {
+        guard let __unwrapped__instance = __x_ABI_C__FIVector_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationWrapper.tryUnwrapFrom(raw: $0) else { return E_INVALIDARG }
+        let value: WinAppSDK.AppNotification? = .from(abi: ComPtr($1))
+        var index: UInt32 = 0
+        let result = __unwrapped__instance.indexOf(value, &index)
+        $2?.initialize(to: index)
+        $3?.initialize(to: .init(from: result))
+        return S_OK
+    },
+
+    SetAt: {
+        guard let __unwrapped__instance = __x_ABI_C__FIVector_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationWrapper.tryUnwrapFrom(raw: $0) else { return E_INVALIDARG }
+        let index: UInt32 = $1
+        let value: WinAppSDK.AppNotification? = .from(abi: ComPtr($2))
+        __unwrapped__instance.setAt(index, value)
+        return S_OK
+    },
+
+    InsertAt: {
+        guard let __unwrapped__instance = __x_ABI_C__FIVector_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationWrapper.tryUnwrapFrom(raw: $0) else { return E_INVALIDARG }
+        let index: UInt32 = $1
+        let value: WinAppSDK.AppNotification? = .from(abi: ComPtr($2))
+        __unwrapped__instance.insertAt(index, value)
+        return S_OK
+    },
+
+    RemoveAt: {
+        guard let __unwrapped__instance = __x_ABI_C__FIVector_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationWrapper.tryUnwrapFrom(raw: $0) else { return E_INVALIDARG }
+        let index: UInt32 = $1
+        __unwrapped__instance.removeAt(index)
+        return S_OK
+    },
+
+    Append: {
+        guard let __unwrapped__instance = __x_ABI_C__FIVector_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationWrapper.tryUnwrapFrom(raw: $0) else { return E_INVALIDARG }
+        let value: WinAppSDK.AppNotification? = .from(abi: ComPtr($1))
+        __unwrapped__instance.append(value)
+        return S_OK
+    },
+
+    RemoveAtEnd: {
+        guard let __unwrapped__instance = __x_ABI_C__FIVector_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationWrapper.tryUnwrapFrom(raw: $0) else { return E_INVALIDARG }
+        __unwrapped__instance.removeAtEnd()
+        return S_OK
+    },
+
+    Clear: {
+        guard let __unwrapped__instance = __x_ABI_C__FIVector_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationWrapper.tryUnwrapFrom(raw: $0) else { return E_INVALIDARG }
+        __unwrapped__instance.clear()
+        return S_OK
+    },
+
+    GetMany: { _, _, _, _, _ in return failWith(err: E_NOTIMPL) },
+
+    ReplaceAll: { _, _, _ in return failWith(err: E_NOTIMPL) }
+)
+typealias __x_ABI_C__FIVector_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationWrapper = InterfaceWrapperBase<WinAppSDK.__x_ABI_C__FIVector_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationBridge>
+internal class IVectorAppNotification: WindowsFoundation.IInspectable {
+    override public class var IID: WindowsFoundation.IID { IID___x_ABI_C__FIVector_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotification }
+
+    internal func GetAtImpl(_ index: UInt32) throws -> WinAppSDK.AppNotification? {
+        let (result) = try ComPtrs.initialize { resultAbi in
+            _ = try perform(as: __x_ABI_C__FIVector_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotification.self) { pThis in
+                try CHECKED(pThis.pointee.lpVtbl.pointee.GetAt(pThis, index, &resultAbi))
+            }
+        }
+        return .from(abi: result)
+    }
+
+    internal func get_SizeImpl() throws -> UInt32 {
+        var result: UINT32 = 0
+        _ = try perform(as: __x_ABI_C__FIVector_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotification.self) { pThis in
+            try CHECKED(pThis.pointee.lpVtbl.pointee.get_Size(pThis, &result))
+        }
+        return result
+    }
+
+    internal func GetViewImpl() throws -> WindowsFoundation.AnyIVectorView<WinAppSDK.AppNotification?>? {
+        let (result) = try ComPtrs.initialize { resultAbi in
+            _ = try perform(as: __x_ABI_C__FIVector_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotification.self) { pThis in
+                try CHECKED(pThis.pointee.lpVtbl.pointee.GetView(pThis, &resultAbi))
+            }
+        }
+        return WinAppSDK.__x_ABI_C__FIVectorView_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationWrapper.unwrapFrom(abi: result)
+    }
+
+    internal func IndexOfImpl(_ value: WinAppSDK.AppNotification?, _ index: inout UInt32) throws -> Bool {
+        var result: boolean = 0
+        _ = try perform(as: __x_ABI_C__FIVector_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotification.self) { pThis in
+            try CHECKED(pThis.pointee.lpVtbl.pointee.IndexOf(pThis, RawPointer(value), &index, &result))
+        }
+        return .init(from: result)
+    }
+
+    internal func SetAtImpl(_ index: UInt32, _ value: WinAppSDK.AppNotification?) throws {
+        _ = try perform(as: __x_ABI_C__FIVector_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotification.self) { pThis in
+            try CHECKED(pThis.pointee.lpVtbl.pointee.SetAt(pThis, index, RawPointer(value)))
+        }
+    }
+
+    internal func InsertAtImpl(_ index: UInt32, _ value: WinAppSDK.AppNotification?) throws {
+        _ = try perform(as: __x_ABI_C__FIVector_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotification.self) { pThis in
+            try CHECKED(pThis.pointee.lpVtbl.pointee.InsertAt(pThis, index, RawPointer(value)))
+        }
+    }
+
+    internal func RemoveAtImpl(_ index: UInt32) throws {
+        _ = try perform(as: __x_ABI_C__FIVector_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotification.self) { pThis in
+            try CHECKED(pThis.pointee.lpVtbl.pointee.RemoveAt(pThis, index))
+        }
+    }
+
+    internal func AppendImpl(_ value: WinAppSDK.AppNotification?) throws {
+        _ = try perform(as: __x_ABI_C__FIVector_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotification.self) { pThis in
+            try CHECKED(pThis.pointee.lpVtbl.pointee.Append(pThis, RawPointer(value)))
+        }
+    }
+
+    internal func RemoveAtEndImpl() throws {
+        _ = try perform(as: __x_ABI_C__FIVector_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotification.self) { pThis in
+            try CHECKED(pThis.pointee.lpVtbl.pointee.RemoveAtEnd(pThis))
+        }
+    }
+
+    internal func ClearImpl() throws {
+        _ = try perform(as: __x_ABI_C__FIVector_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotification.self) { pThis in
+            try CHECKED(pThis.pointee.lpVtbl.pointee.Clear(pThis))
+        }
+    }
+
+}
+
+internal enum __x_ABI_C__FIVector_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationBridge : AbiInterfaceBridge {
+    internal typealias CABI = __x_ABI_C__FIVector_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotification
+    internal typealias SwiftABI = IVectorAppNotification
+    internal typealias SwiftProjection = WindowsFoundation.AnyIVector<WinAppSDK.AppNotification?>
+    internal static func from(abi: ComPtr<CABI>?) -> SwiftProjection? {
+        guard let abi = abi else { return nil }
+        return __x_ABI_C__FIVector_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationImpl(abi)
+    }
+
+    internal static func makeAbi() -> CABI {
+        let vtblPtr = withUnsafeMutablePointer(to: &__x_ABI_C__FIVector_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationVTable) { $0 }
+        return .init(lpVtbl: vtblPtr)
+    }
+}
+
+fileprivate class __x_ABI_C__FIVector_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationImpl : IVector, AbiInterfaceImpl {
+    typealias T = WinAppSDK.AppNotification?
+    typealias Bridge = __x_ABI_C__FIVector_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationBridge
+    let _default: Bridge.SwiftABI
+    init(_ fromAbi: ComPtr<Bridge.CABI>) {
+        _default = Bridge.SwiftABI(fromAbi)
+    }
+
+    // MARK: Collection
+    typealias Element = T
+    var startIndex: Int { 0 }
+    var endIndex: Int { Int(size) }
+    func index(after i: Int) -> Int {
+        i+1
+    }
+
+    func index(of: Element) -> Int? {
+        var index: UInt32 = 0
+        let result = indexOf(of, &index)
+        guard result else { return nil }
+        return Int(index)
+    }
+    var count: Int { Int(size) }
+
+
+    subscript(position: Int) -> Element {
+        get {
+            getAt(UInt32(position))
+        }
+        set(newValue) {
+            setAt(UInt32(position), newValue)
+        }
+    }
+
+    func removeLast() {
+        removeAtEnd()
+    }
+
+    // MARK: WinRT
+    /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.foundation.collections.ivector-1.getat)
+    fileprivate func getAt(_ index: UInt32) -> WinAppSDK.AppNotification? {
+        try! _default.GetAtImpl(index)
+    }
+
+    /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.foundation.collections.ivector-1.getview)
+    fileprivate func getView() -> WindowsFoundation.AnyIVectorView<WinAppSDK.AppNotification?>? {
+        try! _default.GetViewImpl()
+    }
+
+    /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.foundation.collections.ivector-1.indexof)
+    fileprivate func indexOf(_ value: WinAppSDK.AppNotification?, _ index: inout UInt32) -> Bool {
+        try! _default.IndexOfImpl(value, &index)
+    }
+
+    /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.foundation.collections.ivector-1.setat)
+    fileprivate func setAt(_ index: UInt32, _ value: WinAppSDK.AppNotification?) {
+        try! _default.SetAtImpl(index, value)
+    }
+
+    /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.foundation.collections.ivector-1.insertat)
+    fileprivate func insertAt(_ index: UInt32, _ value: WinAppSDK.AppNotification?) {
+        try! _default.InsertAtImpl(index, value)
+    }
+
+    /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.foundation.collections.ivector-1.removeat)
+    fileprivate func removeAt(_ index: UInt32) {
+        try! _default.RemoveAtImpl(index)
+    }
+
+    /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.foundation.collections.ivector-1.append)
+    fileprivate func append(_ value: WinAppSDK.AppNotification?) {
+        try! _default.AppendImpl(value)
+    }
+
+    /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.foundation.collections.ivector-1.removeatend)
+    fileprivate func removeAtEnd() {
+        try! _default.RemoveAtEndImpl()
+    }
+
+    /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.foundation.collections.ivector-1.clear)
+    fileprivate func clear() {
+        try! _default.ClearImpl()
+    }
+
+    /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.foundation.collections.ivector-1.size)
+    fileprivate var size : UInt32 {
+        get { try! _default.get_SizeImpl() }
+    }
+
+    private lazy var _IIterable: IIterableAppNotification! = getInterfaceForCaching()
+    /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.foundation.collections.ivector-1.first)
+    fileprivate func first() -> WindowsFoundation.AnyIIterator<WinAppSDK.AppNotification?>? {
+        try! _IIterable.FirstImpl()
+    }
+
+    public func queryInterface(_ iid: WindowsFoundation.IID) -> IUnknownRef? { nil }
+}
+
 private var IID___x_ABI_C__FIEventHandler_1___x_ABI_CMicrosoft__CWindows__CAppLifecycle__CAppActivationArguments: WindowsFoundation.IID {
     .init(Data1: 0x37d74b33, Data2: 0x9510, Data3: 0x5748, Data4: ( 0xb3,0x3d,0x46,0x76,0xee,0x2b,0x48,0xa7 ))// 37d74b33-9510-5748-b33d-4676ee2b48a7
 }
@@ -7379,7 +8157,7 @@ internal var __x_ABI_C__FIAsyncOperation_1___x_ABI_CMicrosoft__CUI__CComposition
             let resultWrapper = __ABI_Microsoft_UI_Composition.ICompositionSurfaceWrapper(result)
             resultWrapper?.copyTo($1)
             return S_OK
-        } catch { return failWith(err: E_FAIL) } 
+        } catch { return failWith(err: E_FAIL) }
     }
 )
 typealias __x_ABI_C__FIAsyncOperation_1___x_ABI_CMicrosoft__CUI__CComposition__CICompositionSurfaceWrapper = InterfaceWrapperBase<WinAppSDK.__x_ABI_C__FIAsyncOperation_1___x_ABI_CMicrosoft__CUI__CComposition__CICompositionSurfaceBridge>
@@ -7445,6 +8223,312 @@ fileprivate class __x_ABI_C__FIAsyncOperation_1___x_ABI_CMicrosoft__CUI__CCompos
 
     /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.foundation.iasyncoperation-1.completed)
     fileprivate var completed : AsyncOperationCompletedHandler<WinAppSDK.AnyICompositionSurface?>? {
+        get { try! _default.get_CompletedImpl() }
+        set { try! _default.put_CompletedImpl(newValue) }
+    }
+
+    private lazy var _IAsyncInfo: __ABI_Windows_Foundation.IAsyncInfo! = getInterfaceForCaching()
+    /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.foundation.iasyncoperation-1.cancel)
+    fileprivate func cancel() throws {
+        try _IAsyncInfo.CancelImpl()
+    }
+
+    /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.foundation.iasyncoperation-1.close)
+    fileprivate func close() throws {
+        try _IAsyncInfo.CloseImpl()
+    }
+
+    /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.foundation.iasyncoperation-1.errorcode)
+    fileprivate var errorCode : HRESULT {
+        get { try! _IAsyncInfo.get_ErrorCodeImpl() }
+    }
+
+    /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.foundation.iasyncoperation-1.id)
+    fileprivate var id : UInt32 {
+        get { try! _IAsyncInfo.get_IdImpl() }
+    }
+
+    /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.foundation.iasyncoperation-1.status)
+    fileprivate var status : WindowsFoundation.AsyncStatus {
+        get { try! _IAsyncInfo.get_StatusImpl() }
+    }
+
+    public func queryInterface(_ iid: WindowsFoundation.IID) -> IUnknownRef? { nil }
+}
+
+private var IID___x_ABI_C__FIAsyncOperation_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationProgressResult: WindowsFoundation.IID {
+    .init(Data1: 0xaa739d3f, Data2: 0xd458, Data3: 0x5d30, Data4: ( 0xb2,0x92,0xde,0x6d,0x52,0x97,0x9e,0xb4 ))// aa739d3f-d458-5d30-b292-de6d52979eb4
+}
+
+internal var __x_ABI_C__FIAsyncOperation_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationProgressResultVTable: __x_ABI_C__FIAsyncOperation_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationProgressResultVtbl = .init(
+    QueryInterface: { __x_ABI_C__FIAsyncOperation_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationProgressResultWrapper.queryInterface($0, $1, $2) },
+    AddRef: { __x_ABI_C__FIAsyncOperation_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationProgressResultWrapper.addRef($0) },
+    Release: { __x_ABI_C__FIAsyncOperation_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationProgressResultWrapper.release($0) },
+    GetIids: {
+        let size = MemoryLayout<WindowsFoundation.IID>.size
+        let iids = CoTaskMemAlloc(UInt64(size) * 4).assumingMemoryBound(to: WindowsFoundation.IID.self)
+        iids[0] = IUnknown.IID
+        iids[1] = IInspectable.IID
+        iids[2] = WinAppSDK.__x_ABI_C__FIAsyncOperation_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationProgressResultWrapper.IID
+        iids[3] = __ABI_Windows_Foundation.IAsyncInfoWrapper.IID
+        $1!.pointee = 4
+        $2!.pointee = iids
+        return S_OK
+    },
+
+    GetRuntimeClassName: {
+        _ = $0
+        let hstring = try! HString("Windows.Foundation.IAsyncOperation`1<Microsoft.Windows.AppNotifications.AppNotificationProgressResult>").detach()
+        $1!.pointee = hstring
+        return S_OK
+    },
+
+    GetTrustLevel: {
+        _ = $0
+        $1!.pointee = TrustLevel(rawValue: 0)
+        return S_OK
+    },
+
+    put_Completed: {
+        guard let __unwrapped__instance = __x_ABI_C__FIAsyncOperation_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationProgressResultWrapper.tryUnwrapFrom(raw: $0) else { return E_INVALIDARG }
+        guard let handler = WinAppSDK.__x_ABI_C__FIAsyncOperationCompletedHandler_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationProgressResultWrapper.unwrapFrom(abi: ComPtr($1)) else { return E_INVALIDARG }
+        __unwrapped__instance.completed = handler
+        return S_OK
+    },
+
+    get_Completed: {
+        guard let __unwrapped__instance = __x_ABI_C__FIAsyncOperation_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationProgressResultWrapper.tryUnwrapFrom(raw: $0) else { return E_INVALIDARG }
+        let result = __unwrapped__instance.completed
+        let resultWrapper = WinAppSDK.__x_ABI_C__FIAsyncOperationCompletedHandler_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationProgressResultWrapper(result)
+        resultWrapper?.copyTo($1)
+        return S_OK
+    },
+
+    GetResults: {
+        do {
+            guard let __unwrapped__instance = __x_ABI_C__FIAsyncOperation_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationProgressResultWrapper.tryUnwrapFrom(raw: $0) else { return E_INVALIDARG }
+            let result = try __unwrapped__instance.getResults()
+            $1?.initialize(to: result)
+            return S_OK
+        } catch { return failWith(err: E_FAIL) }
+    }
+)
+typealias __x_ABI_C__FIAsyncOperation_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationProgressResultWrapper = InterfaceWrapperBase<WinAppSDK.__x_ABI_C__FIAsyncOperation_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationProgressResultBridge>
+internal class IAsyncOperationAppNotificationProgressResult: WindowsFoundation.IInspectable {
+    override public class var IID: WindowsFoundation.IID { IID___x_ABI_C__FIAsyncOperation_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationProgressResult }
+
+    internal func put_CompletedImpl(_ handler: AsyncOperationCompletedHandler<WinAppSDK.AppNotificationProgressResult>?) throws {
+        let handlerWrapper = WinAppSDK.__x_ABI_C__FIAsyncOperationCompletedHandler_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationProgressResultWrapper(handler)
+        let _handler = try! handlerWrapper?.toABI { $0 }
+        _ = try perform(as: __x_ABI_C__FIAsyncOperation_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationProgressResult.self) { pThis in
+            try CHECKED(pThis.pointee.lpVtbl.pointee.put_Completed(pThis, _handler))
+        }
+    }
+
+    internal func get_CompletedImpl() throws -> AsyncOperationCompletedHandler<WinAppSDK.AppNotificationProgressResult>? {
+        let (result) = try ComPtrs.initialize { resultAbi in
+            _ = try perform(as: __x_ABI_C__FIAsyncOperation_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationProgressResult.self) { pThis in
+                try CHECKED(pThis.pointee.lpVtbl.pointee.get_Completed(pThis, &resultAbi))
+            }
+        }
+        return WinAppSDK.__x_ABI_C__FIAsyncOperationCompletedHandler_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationProgressResultWrapper.unwrapFrom(abi: result)
+    }
+
+    internal func GetResultsImpl() throws -> WinAppSDK.AppNotificationProgressResult {
+        var result: __x_ABI_CMicrosoft_CWindows_CAppNotifications_CAppNotificationProgressResult = .init(0)
+        _ = try perform(as: __x_ABI_C__FIAsyncOperation_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationProgressResult.self) { pThis in
+            try CHECKED(pThis.pointee.lpVtbl.pointee.GetResults(pThis, &result))
+        }
+        return result
+    }
+
+}
+
+internal enum __x_ABI_C__FIAsyncOperation_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationProgressResultBridge : AbiInterfaceBridge {
+    internal typealias CABI = __x_ABI_C__FIAsyncOperation_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationProgressResult
+    internal typealias SwiftABI = IAsyncOperationAppNotificationProgressResult
+    internal typealias SwiftProjection = WindowsFoundation.AnyIAsyncOperation<WinAppSDK.AppNotificationProgressResult>
+    internal static func from(abi: ComPtr<CABI>?) -> SwiftProjection? {
+        guard let abi = abi else { return nil }
+        return __x_ABI_C__FIAsyncOperation_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationProgressResultImpl(abi)
+    }
+
+    internal static func makeAbi() -> CABI {
+        let vtblPtr = withUnsafeMutablePointer(to: &__x_ABI_C__FIAsyncOperation_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationProgressResultVTable) { $0 }
+        return .init(lpVtbl: vtblPtr)
+    }
+}
+
+fileprivate class __x_ABI_C__FIAsyncOperation_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationProgressResultImpl : IAsyncOperation, AbiInterfaceImpl {
+    typealias TResult = WinAppSDK.AppNotificationProgressResult
+    typealias Bridge = __x_ABI_C__FIAsyncOperation_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationProgressResultBridge
+    let _default: Bridge.SwiftABI
+    init(_ fromAbi: ComPtr<Bridge.CABI>) {
+        _default = Bridge.SwiftABI(fromAbi)
+    }
+
+    // MARK: WinRT
+    /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.foundation.iasyncoperation-1.getresults)
+    fileprivate func getResults() throws -> WinAppSDK.AppNotificationProgressResult {
+        try _default.GetResultsImpl()
+    }
+
+    /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.foundation.iasyncoperation-1.completed)
+    fileprivate var completed : AsyncOperationCompletedHandler<WinAppSDK.AppNotificationProgressResult>? {
+        get { try! _default.get_CompletedImpl() }
+        set { try! _default.put_CompletedImpl(newValue) }
+    }
+
+    private lazy var _IAsyncInfo: __ABI_Windows_Foundation.IAsyncInfo! = getInterfaceForCaching()
+    /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.foundation.iasyncoperation-1.cancel)
+    fileprivate func cancel() throws {
+        try _IAsyncInfo.CancelImpl()
+    }
+
+    /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.foundation.iasyncoperation-1.close)
+    fileprivate func close() throws {
+        try _IAsyncInfo.CloseImpl()
+    }
+
+    /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.foundation.iasyncoperation-1.errorcode)
+    fileprivate var errorCode : HRESULT {
+        get { try! _IAsyncInfo.get_ErrorCodeImpl() }
+    }
+
+    /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.foundation.iasyncoperation-1.id)
+    fileprivate var id : UInt32 {
+        get { try! _IAsyncInfo.get_IdImpl() }
+    }
+
+    /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.foundation.iasyncoperation-1.status)
+    fileprivate var status : WindowsFoundation.AsyncStatus {
+        get { try! _IAsyncInfo.get_StatusImpl() }
+    }
+
+    public func queryInterface(_ iid: WindowsFoundation.IID) -> IUnknownRef? { nil }
+}
+
+private var IID___x_ABI_C__FIAsyncOperation_1___x_ABI_C__FIVector_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotification: WindowsFoundation.IID {
+    .init(Data1: 0x704700c2, Data2: 0xf4a1, Data3: 0x5edd, Data4: ( 0x87,0x1a,0xd0,0xba,0x8b,0x9b,0x4c,0x59 ))// 704700c2-f4a1-5edd-871a-d0ba8b9b4c59
+}
+
+internal var __x_ABI_C__FIAsyncOperation_1___x_ABI_C__FIVector_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationVTable: __x_ABI_C__FIAsyncOperation_1___x_ABI_C__FIVector_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationVtbl = .init(
+    QueryInterface: { __x_ABI_C__FIAsyncOperation_1___x_ABI_C__FIVector_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationWrapper.queryInterface($0, $1, $2) },
+    AddRef: { __x_ABI_C__FIAsyncOperation_1___x_ABI_C__FIVector_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationWrapper.addRef($0) },
+    Release: { __x_ABI_C__FIAsyncOperation_1___x_ABI_C__FIVector_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationWrapper.release($0) },
+    GetIids: {
+        let size = MemoryLayout<WindowsFoundation.IID>.size
+        let iids = CoTaskMemAlloc(UInt64(size) * 4).assumingMemoryBound(to: WindowsFoundation.IID.self)
+        iids[0] = IUnknown.IID
+        iids[1] = IInspectable.IID
+        iids[2] = WinAppSDK.__x_ABI_C__FIAsyncOperation_1___x_ABI_C__FIVector_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationWrapper.IID
+        iids[3] = __ABI_Windows_Foundation.IAsyncInfoWrapper.IID
+        $1!.pointee = 4
+        $2!.pointee = iids
+        return S_OK
+    },
+
+    GetRuntimeClassName: {
+        _ = $0
+        let hstring = try! HString("Windows.Foundation.IAsyncOperation`1<Windows.Foundation.Collections.IVector`1<Microsoft.Windows.AppNotifications.AppNotification>>").detach()
+        $1!.pointee = hstring
+        return S_OK
+    },
+
+    GetTrustLevel: {
+        _ = $0
+        $1!.pointee = TrustLevel(rawValue: 0)
+        return S_OK
+    },
+
+    put_Completed: {
+        guard let __unwrapped__instance = __x_ABI_C__FIAsyncOperation_1___x_ABI_C__FIVector_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationWrapper.tryUnwrapFrom(raw: $0) else { return E_INVALIDARG }
+        guard let handler = WinAppSDK.__x_ABI_C__FIAsyncOperationCompletedHandler_1___x_ABI_C__FIVector_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationWrapper.unwrapFrom(abi: ComPtr($1)) else { return E_INVALIDARG }
+        __unwrapped__instance.completed = handler
+        return S_OK
+    },
+
+    get_Completed: {
+        guard let __unwrapped__instance = __x_ABI_C__FIAsyncOperation_1___x_ABI_C__FIVector_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationWrapper.tryUnwrapFrom(raw: $0) else { return E_INVALIDARG }
+        let result = __unwrapped__instance.completed
+        let resultWrapper = WinAppSDK.__x_ABI_C__FIAsyncOperationCompletedHandler_1___x_ABI_C__FIVector_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationWrapper(result)
+        resultWrapper?.copyTo($1)
+        return S_OK
+    },
+
+    GetResults: {
+        do {
+            guard let __unwrapped__instance = __x_ABI_C__FIAsyncOperation_1___x_ABI_C__FIVector_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationWrapper.tryUnwrapFrom(raw: $0) else { return E_INVALIDARG }
+            let result = try __unwrapped__instance.getResults()
+            let resultWrapper = WinAppSDK.__x_ABI_C__FIVector_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationWrapper(result)
+            resultWrapper?.copyTo($1)
+            return S_OK
+        } catch { return failWith(err: E_FAIL) }
+    }
+)
+typealias __x_ABI_C__FIAsyncOperation_1___x_ABI_C__FIVector_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationWrapper = InterfaceWrapperBase<WinAppSDK.__x_ABI_C__FIAsyncOperation_1___x_ABI_C__FIVector_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationBridge>
+internal class IAsyncOperationIVectorAppNotification: WindowsFoundation.IInspectable {
+    override public class var IID: WindowsFoundation.IID { IID___x_ABI_C__FIAsyncOperation_1___x_ABI_C__FIVector_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotification }
+
+    internal func put_CompletedImpl(_ handler: AsyncOperationCompletedHandler<WindowsFoundation.AnyIVector<WinAppSDK.AppNotification?>?>?) throws {
+        let handlerWrapper = WinAppSDK.__x_ABI_C__FIAsyncOperationCompletedHandler_1___x_ABI_C__FIVector_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationWrapper(handler)
+        let _handler = try! handlerWrapper?.toABI { $0 }
+        _ = try perform(as: __x_ABI_C__FIAsyncOperation_1___x_ABI_C__FIVector_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotification.self) { pThis in
+            try CHECKED(pThis.pointee.lpVtbl.pointee.put_Completed(pThis, _handler))
+        }
+    }
+
+    internal func get_CompletedImpl() throws -> AsyncOperationCompletedHandler<WindowsFoundation.AnyIVector<WinAppSDK.AppNotification?>?>? {
+        let (result) = try ComPtrs.initialize { resultAbi in
+            _ = try perform(as: __x_ABI_C__FIAsyncOperation_1___x_ABI_C__FIVector_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotification.self) { pThis in
+                try CHECKED(pThis.pointee.lpVtbl.pointee.get_Completed(pThis, &resultAbi))
+            }
+        }
+        return WinAppSDK.__x_ABI_C__FIAsyncOperationCompletedHandler_1___x_ABI_C__FIVector_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationWrapper.unwrapFrom(abi: result)
+    }
+
+    internal func GetResultsImpl() throws -> WindowsFoundation.AnyIVector<WinAppSDK.AppNotification?>? {
+        let (result) = try ComPtrs.initialize { resultAbi in
+            _ = try perform(as: __x_ABI_C__FIAsyncOperation_1___x_ABI_C__FIVector_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotification.self) { pThis in
+                try CHECKED(pThis.pointee.lpVtbl.pointee.GetResults(pThis, &resultAbi))
+            }
+        }
+        return WinAppSDK.__x_ABI_C__FIVector_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationWrapper.unwrapFrom(abi: result)
+    }
+
+}
+
+internal enum __x_ABI_C__FIAsyncOperation_1___x_ABI_C__FIVector_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationBridge : AbiInterfaceBridge {
+    internal typealias CABI = __x_ABI_C__FIAsyncOperation_1___x_ABI_C__FIVector_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotification
+    internal typealias SwiftABI = IAsyncOperationIVectorAppNotification
+    internal typealias SwiftProjection = WindowsFoundation.AnyIAsyncOperation<WindowsFoundation.AnyIVector<WinAppSDK.AppNotification?>?>
+    internal static func from(abi: ComPtr<CABI>?) -> SwiftProjection? {
+        guard let abi = abi else { return nil }
+        return __x_ABI_C__FIAsyncOperation_1___x_ABI_C__FIVector_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationImpl(abi)
+    }
+
+    internal static func makeAbi() -> CABI {
+        let vtblPtr = withUnsafeMutablePointer(to: &__x_ABI_C__FIAsyncOperation_1___x_ABI_C__FIVector_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationVTable) { $0 }
+        return .init(lpVtbl: vtblPtr)
+    }
+}
+
+fileprivate class __x_ABI_C__FIAsyncOperation_1___x_ABI_C__FIVector_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationImpl : IAsyncOperation, AbiInterfaceImpl {
+    typealias TResult = WindowsFoundation.AnyIVector<WinAppSDK.AppNotification?>?
+    typealias Bridge = __x_ABI_C__FIAsyncOperation_1___x_ABI_C__FIVector_1___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationBridge
+    let _default: Bridge.SwiftABI
+    init(_ fromAbi: ComPtr<Bridge.CABI>) {
+        _default = Bridge.SwiftABI(fromAbi)
+    }
+
+    // MARK: WinRT
+    /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.foundation.iasyncoperation-1.getresults)
+    fileprivate func getResults() throws -> WindowsFoundation.AnyIVector<WinAppSDK.AppNotification?>? {
+        try _default.GetResultsImpl()
+    }
+
+    /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.foundation.iasyncoperation-1.completed)
+    fileprivate var completed : AsyncOperationCompletedHandler<WindowsFoundation.AnyIVector<WinAppSDK.AppNotification?>?>? {
         get { try! _default.get_CompletedImpl() }
         set { try! _default.put_CompletedImpl(newValue) }
     }
@@ -9645,6 +10729,55 @@ internal class __x_ABI_C__FITypedEventHandler_2___x_ABI_CMicrosoft__CUI__CWindow
     internal typealias Handler = WindowsFoundation.TypedEventHandler<WinAppSDK.DisplayAreaWatcher?, WinAppSDK.DisplayArea?>
     internal typealias CABI = __x_ABI_C__FITypedEventHandler_2___x_ABI_CMicrosoft__CUI__CWindowing__CDisplayAreaWatcher___x_ABI_CMicrosoft__CUI__CWindowing__CDisplayArea
     internal typealias SwiftABI = WinAppSDK.TypedEventHandlerDisplayAreaWatcher_DisplayArea
+
+    internal static func from(abi: ComPtr<CABI>?) -> Handler? {
+        guard let abi = abi else { return nil }
+        let _default = SwiftABI(abi)
+        let handler: Handler = { (sender, args) in
+            try! _default.InvokeImpl(sender, args)
+        }
+        return handler
+    }
+}
+private var IID___x_ABI_C__FITypedEventHandler_2___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationManager___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationActivatedEventArgs: WindowsFoundation.IID {
+    .init(Data1: 0x9909b0b0, Data2: 0xef99, Data3: 0x5bce, Data4: ( 0x97,0xc8,0x78,0x19,0x0d,0x41,0x1b,0x61 ))// 9909b0b0-ef99-5bce-97c8-78190d411b61
+}
+
+internal extension WinRTDelegateBridge where CABI == __x_ABI_C__FITypedEventHandler_2___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationManager___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationActivatedEventArgs {
+    static func makeAbi() -> CABI {
+        let vtblPtr = withUnsafeMutablePointer(to: &WinAppSDK.__x_ABI_C__FITypedEventHandler_2___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationManager___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationActivatedEventArgsVTable) { $0 }
+        return .init(lpVtbl:vtblPtr)
+    }
+}
+
+internal var __x_ABI_C__FITypedEventHandler_2___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationManager___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationActivatedEventArgsVTable: __x_ABI_C__FITypedEventHandler_2___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationManager___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationActivatedEventArgsVtbl = .init(
+    QueryInterface: { __x_ABI_C__FITypedEventHandler_2___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationManager___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationActivatedEventArgsWrapper.queryInterface($0, $1, $2) },
+    AddRef: { __x_ABI_C__FITypedEventHandler_2___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationManager___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationActivatedEventArgsWrapper.addRef($0) },
+    Release: { __x_ABI_C__FITypedEventHandler_2___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationManager___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationActivatedEventArgsWrapper.release($0) },
+    Invoke: {
+        guard let __unwrapped__instance = __x_ABI_C__FITypedEventHandler_2___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationManager___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationActivatedEventArgsWrapper.tryUnwrapFrom(raw: $0) else { return E_INVALIDARG }
+        let sender: WinAppSDK.AppNotificationManager? = .from(abi: ComPtr($1))
+        let args: WinAppSDK.AppNotificationActivatedEventArgs? = .from(abi: ComPtr($2))
+        __unwrapped__instance(sender, args)
+        return S_OK
+    }
+)
+typealias __x_ABI_C__FITypedEventHandler_2___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationManager___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationActivatedEventArgsWrapper = InterfaceWrapperBase<WinAppSDK.__x_ABI_C__FITypedEventHandler_2___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationManager___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationActivatedEventArgsBridge>
+internal class TypedEventHandlerAppNotificationManager_AppNotificationActivatedEventArgs: WindowsFoundation.IUnknown {
+    override public class var IID: WindowsFoundation.IID { IID___x_ABI_C__FITypedEventHandler_2___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationManager___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationActivatedEventArgs }
+
+    internal func InvokeImpl(_ sender: WinAppSDK.AppNotificationManager?, _ args: WinAppSDK.AppNotificationActivatedEventArgs?) throws {
+        _ = try perform(as: __x_ABI_C__FITypedEventHandler_2___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationManager___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationActivatedEventArgs.self) { pThis in
+            try CHECKED(pThis.pointee.lpVtbl.pointee.Invoke(pThis, RawPointer(sender), RawPointer(args)))
+        }
+    }
+
+}
+
+internal class __x_ABI_C__FITypedEventHandler_2___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationManager___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationActivatedEventArgsBridge : WinRTDelegateBridge {
+    internal typealias Handler = WindowsFoundation.TypedEventHandler<WinAppSDK.AppNotificationManager?, WinAppSDK.AppNotificationActivatedEventArgs?>
+    internal typealias CABI = __x_ABI_C__FITypedEventHandler_2___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationManager___x_ABI_CMicrosoft__CWindows__CAppNotifications__CAppNotificationActivatedEventArgs
+    internal typealias SwiftABI = WinAppSDK.TypedEventHandlerAppNotificationManager_AppNotificationActivatedEventArgs
 
     internal static func from(abi: ComPtr<CABI>?) -> Handler? {
         guard let abi = abi else { return nil }

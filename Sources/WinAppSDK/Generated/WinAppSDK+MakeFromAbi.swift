@@ -846,6 +846,42 @@ fileprivate func makeAppInstanceFrom(abi: WindowsFoundation.IInspectable) -> Any
     return AppInstance(fromAbi: abi)
 }
 
+fileprivate func makeAppNotificationFrom(abi: WindowsFoundation.IInspectable) -> Any {
+    return AppNotification(fromAbi: abi)
+}
+
+fileprivate func makeAppNotificationActivatedEventArgsFrom(abi: WindowsFoundation.IInspectable) -> Any {
+    return AppNotificationActivatedEventArgs(fromAbi: abi)
+}
+
+fileprivate func makeAppNotificationManagerFrom(abi: WindowsFoundation.IInspectable) -> Any {
+    return AppNotificationManager(fromAbi: abi)
+}
+
+fileprivate func makeAppNotificationProgressDataFrom(abi: WindowsFoundation.IInspectable) -> Any {
+    return AppNotificationProgressData(fromAbi: abi)
+}
+
+fileprivate func makeAppNotificationBuilderFrom(abi: WindowsFoundation.IInspectable) -> Any {
+    return AppNotificationBuilder(fromAbi: abi)
+}
+
+fileprivate func makeAppNotificationButtonFrom(abi: WindowsFoundation.IInspectable) -> Any {
+    return AppNotificationButton(fromAbi: abi)
+}
+
+fileprivate func makeAppNotificationComboBoxFrom(abi: WindowsFoundation.IInspectable) -> Any {
+    return AppNotificationComboBox(fromAbi: abi)
+}
+
+fileprivate func makeAppNotificationProgressBarFrom(abi: WindowsFoundation.IInspectable) -> Any {
+    return AppNotificationProgressBar(fromAbi: abi)
+}
+
+fileprivate func makeAppNotificationTextPropertiesFrom(abi: WindowsFoundation.IInspectable) -> Any {
+    return AppNotificationTextProperties(fromAbi: abi)
+}
+
 fileprivate func makeResourceCandidateFrom(abi: WindowsFoundation.IInspectable) -> Any {
     return ResourceCandidate(fromAbi: abi)
 }
@@ -1076,6 +1112,15 @@ public class __MakeFromAbi: MakeFromAbi {
             case "OverlappedPresenter": return makeOverlappedPresenterFrom(abi: abi)
             case "AppActivationArguments": return makeAppActivationArgumentsFrom(abi: abi)
             case "AppInstance": return makeAppInstanceFrom(abi: abi)
+            case "AppNotification": return makeAppNotificationFrom(abi: abi)
+            case "AppNotificationActivatedEventArgs": return makeAppNotificationActivatedEventArgsFrom(abi: abi)
+            case "AppNotificationManager": return makeAppNotificationManagerFrom(abi: abi)
+            case "AppNotificationProgressData": return makeAppNotificationProgressDataFrom(abi: abi)
+            case "AppNotificationBuilder": return makeAppNotificationBuilderFrom(abi: abi)
+            case "AppNotificationButton": return makeAppNotificationButtonFrom(abi: abi)
+            case "AppNotificationComboBox": return makeAppNotificationComboBoxFrom(abi: abi)
+            case "AppNotificationProgressBar": return makeAppNotificationProgressBarFrom(abi: abi)
+            case "AppNotificationTextProperties": return makeAppNotificationTextPropertiesFrom(abi: abi)
             case "ResourceCandidate": return makeResourceCandidateFrom(abi: abi)
             case "ResourceContext": return makeResourceContextFrom(abi: abi)
             case "ResourceManager": return makeResourceManagerFrom(abi: abi)
