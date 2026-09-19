@@ -23,7 +23,7 @@ do {
     write("BOOTSTRAP_PROBE_SHUTDOWN")
 } catch {
     write("BOOTSTRAP_PROBE_CAUGHT_ERROR")
-    write("BOOTSTRAP_PROBE_ERROR: \(error.localizedDescription)", to: .standardError)
+    write("BOOTSTRAP_PROBE_ERROR: \(error.localizedDescription) [\(String(describing: error))]", to: .standardError)
     ExitProcess(1)
 }
 #else

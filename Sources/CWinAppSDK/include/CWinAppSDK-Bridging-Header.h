@@ -17,4 +17,10 @@
 // re-define the string to make it visible in Swift. (#define only supports numbers & strings)
 static PCWSTR WINDOWSAPPSDK_RELEASE_VERSION_TAG_SWIFT = WINDOWSAPPSDK_RELEASE_VERSION_TAG_W;
 
+// Returns a borrowed module handle; the caller must not release it.
+#if defined(__cplusplus)
+extern "C"
+#endif
+HMODULE CWinAppSDKContainingModule(void);
+
 #endif

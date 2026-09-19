@@ -49,6 +49,9 @@ if (!$support.PSIsContainer -or ($support.Attributes -band [IO.FileAttributes]::
     throw 'SupportDirectory must be a regular directory.'
 }
 $supportFiles = @(Get-ChildItem -LiteralPath $support.FullName -File -Filter '*.dll')
+if (@($supportFiles | Where-Object { $_.Name -eq 'WinAppSDK.dll' }).Count -ne 1) {
+    throw 'SupportDirectory must contain the candidate WinAppSDK.dll.'
+}
 foreach ($file in $supportFiles) {
     $null = Get-PlainFile $file.FullName
     if ($file.Name -eq 'Microsoft.WindowsAppRuntime.Bootstrap.dll') {
@@ -102,6 +105,7 @@ function Add-Payload([string]$Directory, [string]$Layout, [string]$Fixture) {
 $cases = @(
     @{ name = 'bundle-different-cwd'; bundle = 'complete'; success = $true },
     @{ name = 'bundle-same-cwd'; bundle = 'complete'; success = $true; sameCwd = $true },
+    @{ name = 'module-adjacent-bundle'; bundle = 'complete'; success = $true; moduleAdjacent = $true },
     @{ name = 'missing-library'; success = $false },
     @{ name = 'missing-initialize'; bundle = 'missing-initialize'; success = $false; symbol = 'MddBootstrapInitialize2'; win32 = 127 },
     @{ name = 'missing-shutdown'; bundle = 'missing-shutdown'; success = $false; symbol = 'MddBootstrapShutdown'; win32 = 127 },
@@ -118,14 +122,19 @@ foreach ($case in $cases) {
     $caseRoot = Join-Path $root $case.name
     $suffix = if ($case.ContainsKey('unicode')) { "app space $([char]0x00e9)" } else { 'app' }
     $app = (New-Item -ItemType Directory -Path (Join-Path $caseRoot $suffix) -Force).FullName
+    $moduleDirectory = $app
+    if ($case.ContainsKey('moduleAdjacent')) {
+        $moduleDirectory = (New-Item -ItemType Directory -Path (Join-Path $caseRoot 'native-module')).FullName
+    }
     $cwd = (New-Item -ItemType Directory -Path (Join-Path $caseRoot 'unrelated-cwd')).FullName
     if ($case.ContainsKey('sameCwd')) { $cwd = $app }
     $executable = Join-Path $app 'BootstrapProbe.exe'
     # Link only private stage copies, never the original build or dependency files.
     foreach ($file in @($probe) + $supportFiles) {
-        $null = New-Item -ItemType HardLink -Path (Join-Path $app $file.Name) -Target (Join-Path $shared $file.Name)
+        $directory = if ($file.Name -eq 'WinAppSDK.dll') { $moduleDirectory } else { $app }
+        $null = New-Item -ItemType HardLink -Path (Join-Path $directory $file.Name) -Target (Join-Path $shared $file.Name)
     }
-    if ($case.ContainsKey('bundle')) { Add-Payload $app 'bundle' $case.bundle }
+    if ($case.ContainsKey('bundle')) { Add-Payload $moduleDirectory 'bundle' $case.bundle }
     if ($case.ContainsKey('legacy')) { Add-Payload $app 'resources' $case.legacy }
     if ($case.ContainsKey('decoy')) {
         Add-Payload $cwd 'bundle' 'complete'
@@ -143,6 +152,10 @@ foreach ($case in $cases) {
     $start.RedirectStandardError = $true
     $start.StandardOutputEncoding = [Text.Encoding]::UTF8
     $start.StandardErrorEncoding = [Text.Encoding]::UTF8
+    if ($case.ContainsKey('moduleAdjacent')) {
+        # Only locate the owning WinAppSDK.dll through this child's PATH, not the bootstrap payload.
+        $start.EnvironmentVariables['PATH'] = "$moduleDirectory;$($start.EnvironmentVariables['PATH'])"
+    }
     $process = [Diagnostics.Process]::new()
     $process.StartInfo = $start
     try {
@@ -222,6 +235,7 @@ foreach ($case in $cases) {
         timedOut = $timedOut
         executable = $executable
         cwd = $cwd
+        owningModuleDirectory = $moduleDirectory
         stdout = $output
         stderr = $errorOutput
         failures = $failures

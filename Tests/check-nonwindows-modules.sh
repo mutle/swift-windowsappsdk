@@ -20,11 +20,15 @@ cd "$repo_root"
     -c Sources/CWinAppSDK/delayloadhelper.c \
     -o "$work_dir/delayloadhelper.o"
 
+"${CC:-clang}" \
+    -c Sources/CWinAppSDK/modulehandle.c \
+    -o "$work_dir/modulehandle.o"
+
 swiftc \
     -parse-as-library \
     -emit-module \
     -module-name WinAppSDK \
-    Sources/WinAppSDK/Initialize.swift \
+    Sources/WinAppSDK/*.swift \
     Sources/WinAppSDK/Generated/*.swift \
     -emit-module-path "$work_dir/WinAppSDK.swiftmodule"
 
