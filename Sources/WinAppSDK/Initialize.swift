@@ -2,12 +2,27 @@
 
 import CWinRT
 import CWinAppSDK
+import Foundation
 import WindowsFoundation
 import WinSDK
 
 public enum ThreadingModel {
     case single
     case multi
+}
+
+enum InitializationError: LocalizedError {
+    case failedToInstallWindowsAppRuntime
+
+    var errorDescription: String? {
+        switch self {
+            case .failedToInstallWindowsAppRuntime:
+                return """
+                    Failed to install Windows App Runtime (installer produced \
+                    non-zero exit status)
+                    """
+        }
+    }
 }
 
 /// WindowsAppRuntimeInitializer is used to properly initialize the Windows App SDK runtime, along with the Windows Runtime.
@@ -66,14 +81,43 @@ public class WindowsAppRuntimeInitializer {
             return
         }
 
-        try CHECKED(Initialize(
-            UInt32(WINDOWSAPPSDK_RELEASE_MAJORMINOR),
-            WINDOWSAPPSDK_RELEASE_VERSION_TAG_SWIFT,
-            .init(),
-            MddBootstrapInitializeOptions(
-                MddBootstrapInitializeOptions_OnNoMatch_ShowUI.rawValue
-            )
-        ))
+        let runtimeInstaller = Bundle.main.executableURL!
+            .deletingLastPathComponent()
+            .appendingPathComponent("WindowsAppRuntimeInstaller.exe")
+        let installerExists = FileManager.default.fileExists(atPath: runtimeInstaller.path)
+
+        func doInit(showUIOnNoMatch: Bool) throws {
+            try CHECKED(Initialize(
+                UInt32(WINDOWSAPPSDK_RELEASE_MAJORMINOR),
+                WINDOWSAPPSDK_RELEASE_VERSION_TAG_SWIFT,
+                .init(),
+                MddBootstrapInitializeOptions(
+                    showUIOnNoMatch
+                        ? MddBootstrapInitializeOptions_OnNoMatch_ShowUI.rawValue
+                        : MddBootstrapInitializeOptions_None.rawValue
+                )
+            ))
+        }
+
+        do {
+            try doInit(showUIOnNoMatch: !installerExists)
+        } catch {
+            guard installerExists else {
+                print("Windows App Runtime not found on system, and no installer was present to install it (expected at '\(runtimeInstaller.lastPathComponent)')")
+                throw error
+            }
+
+            let process = Process()
+            process.executableURL = runtimeInstaller
+            try process.run()
+            process.waitUntilExit()
+
+            if process.terminationStatus != 0 {
+                throw InitializationError.failedToInstallWindowsAppRuntime
+            }
+
+            try doInit(showUIOnNoMatch: false)
+        }
     }
 
     deinit {

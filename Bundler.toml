@@ -1,0 +1,13 @@
+format_version = 3
+
+[targets.WinAppSDK]
+dependencies = ["WindowsAppRuntime.installer"]
+
+[projects.WindowsAppRuntime.products.installer]
+type = "executable"
+filename = "WindowsAppRuntimeInstaller.exe"
+prebuilt = "url(https://aka.ms/windowsappsdk/1.5/1.5.250108004/windowsappruntimeinstall-x64.exe)"
+
+[[projects.WindowsAppRuntime.products.installer.overlays]]
+condition = "arch(arm64)"
+prebuilt = "url(https://aka.ms/windowsappsdk/1.5/1.5.250108004/windowsappruntimeinstall-arm64.exe)"
