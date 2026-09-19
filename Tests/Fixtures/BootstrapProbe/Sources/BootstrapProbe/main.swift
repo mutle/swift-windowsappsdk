@@ -22,6 +22,7 @@ do {
     try run()
     write("BOOTSTRAP_PROBE_SHUTDOWN")
 } catch {
+    write("BOOTSTRAP_PROBE_CAUGHT_ERROR")
     write("BOOTSTRAP_PROBE_ERROR: \(error.localizedDescription)", to: .standardError)
     ExitProcess(1)
 }

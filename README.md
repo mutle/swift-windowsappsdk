@@ -51,7 +51,9 @@ In order to use the Windows App SDK, you need to download the Windows App SDK fr
 against the public initializer. These specify Swift 6.4 SwiftBuild's `.bundle`
 layout, target-architecture selection, independence from the working directory,
 and throwing diagnostics for missing DLLs or exports. Legacy `.resources`
-folders must not be used. The regression suite is expected to fail against the
+folders must not be used. Export/initialization failures must unload the DLL
+before the caller catches the error; successful lifetimes must shut down before
+unloading. The regression suite is expected to fail against the
 current unchecked loader until the bootstrap safety fix is implemented.
 
 The DLL fixtures return success without initializing the real Windows App
@@ -80,6 +82,7 @@ MSVC developer environment, substituting the absolute fixture source path:
 cl /nologo /LD /Fo:complete.obj /Fe:complete.dll C:\checkout\Tests\Fixtures\BootstrapExports.c
 cl /nologo /LD /DOMIT_INITIALIZE /Fo:missing-initialize.obj /Fe:missing-initialize.dll C:\checkout\Tests\Fixtures\BootstrapExports.c
 cl /nologo /LD /DOMIT_SHUTDOWN /Fo:missing-shutdown.obj /Fe:missing-shutdown.dll C:\checkout\Tests\Fixtures\BootstrapExports.c
+cl /nologo /LD /DFAIL_INITIALIZE /Fo:initialize-fails.obj /Fe:initialize-fails.dll C:\checkout\Tests\Fixtures\BootstrapExports.c
 ```
 
 Check every compiler exit code before proceeding; a build failure is not a

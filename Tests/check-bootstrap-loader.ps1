@@ -60,7 +60,7 @@ foreach ($file in $supportFiles) {
 }
 
 $fixtures = @{}
-foreach ($name in @('complete', 'missing-initialize', 'missing-shutdown')) {
+foreach ($name in @('complete', 'missing-initialize', 'missing-shutdown', 'initialize-fails')) {
     $file = Get-PlainFile (Join-Path $FixtureDirectory "$name.dll")
     if ((Get-PEMachine $file.FullName) -ne $machine) { throw "Fixture architecture mismatch: $name" }
     $fixtures[$name] = $file.FullName
@@ -105,6 +105,7 @@ $cases = @(
     @{ name = 'missing-library'; success = $false },
     @{ name = 'missing-initialize'; bundle = 'missing-initialize'; success = $false; symbol = 'MddBootstrapInitialize2'; win32 = 127 },
     @{ name = 'missing-shutdown'; bundle = 'missing-shutdown'; success = $false; symbol = 'MddBootstrapShutdown'; win32 = 127 },
+    @{ name = 'bootstrap-failure-unloads'; bundle = 'initialize-fails'; success = $false; bootstrapFailure = $true },
     @{ name = 'legacy-only-is-ignored'; legacy = 'complete'; success = $false },
     @{ name = 'bundle-wins-over-legacy'; bundle = 'complete'; legacy = 'missing-initialize'; success = $true },
     @{ name = 'broken-bundle-does-not-fallback'; bundle = 'invalid-image'; legacy = 'complete'; success = $false; win32 = 193 },
@@ -164,18 +165,24 @@ foreach ($case in $cases) {
     if ($timedOut) { $failures += 'Probe timed out.' }
     if ($case.success) {
         if ($exitCode -ne 0) { $failures += "Expected exit 0; got $exitCode." }
-        foreach ($marker in @('FIXTURE_INITIALIZE', 'BOOTSTRAP_PROBE_INITIALIZED', 'FIXTURE_SHUTDOWN', 'BOOTSTRAP_PROBE_SHUTDOWN')) {
+        $markers = @('FIXTURE_LOADED', 'FIXTURE_INITIALIZE', 'BOOTSTRAP_PROBE_INITIALIZED', 'FIXTURE_SHUTDOWN', 'FIXTURE_UNLOADED', 'BOOTSTRAP_PROBE_SHUTDOWN')
+        $previous = -1
+        foreach ($marker in $markers) {
             if ([regex]::Matches($output, "(?m)^$marker`r?$").Count -ne 1) {
                 $failures += "Expected exactly one $marker marker."
             }
-        }
-        if ($output.IndexOf('FIXTURE_SHUTDOWN') -lt $output.IndexOf('BOOTSTRAP_PROBE_INITIALIZED')) {
-            $failures += 'Shutdown occurred before the initialized lifetime marker.'
+            $position = $output.IndexOf($marker)
+            if ($position -le $previous) { $failures += "Lifecycle marker out of order: $marker" }
+            $previous = $position
         }
         if ($errorOutput.Length -ne 0) { $failures += 'Unexpected stderr on success.' }
     } else {
         if ($exitCode -ne 1) { $failures += "Expected caught error with exit 1; got $exitCode." }
-        foreach ($expected in @('BOOTSTRAP_PROBE_ERROR:', "$resourceName.bundle", $dllName, $app)) {
+        $diagnostics = @('BOOTSTRAP_PROBE_ERROR:')
+        if (!$case.ContainsKey('bootstrapFailure')) {
+            $diagnostics += @("$resourceName.bundle", $dllName, $app)
+        }
+        foreach ($expected in $diagnostics) {
             if (!$errorOutput.Contains($expected)) { $failures += "Diagnostic omitted: $expected" }
         }
         if ($case.ContainsKey('symbol') -and !$errorOutput.Contains($case.symbol)) {
@@ -184,8 +191,27 @@ foreach ($case in $cases) {
         if ($case.ContainsKey('win32') -and $errorOutput -notmatch "\b$($case.win32)\b") {
             $failures += "Diagnostic omitted Win32 error code: $($case.win32)"
         }
-        if ($output -match 'FIXTURE_INITIALIZE|FIXTURE_SHUTDOWN|BOOTSTRAP_PROBE_INITIALIZED') {
+        if ($output -match 'FIXTURE_SHUTDOWN|BOOTSTRAP_PROBE_INITIALIZED') {
             $failures += 'An invalid bootstrap was invoked before validation completed.'
+        }
+        $initializeCount = [regex]::Matches($output, '(?m)^FIXTURE_INITIALIZE\r?$').Count
+        $expectedInitializeCount = if ($case.ContainsKey('bootstrapFailure')) { 1 } else { 0 }
+        if ($initializeCount -ne $expectedInitializeCount) {
+            $failures += "Expected $expectedInitializeCount bootstrap initialize calls; got $initializeCount."
+        }
+        if ([regex]::Matches($output, '(?m)^BOOTSTRAP_PROBE_CAUGHT_ERROR\r?$').Count -ne 1) {
+            $failures += 'Expected exactly one caught-error marker.'
+        }
+        if ($case.ContainsKey('symbol') -or $case.ContainsKey('bootstrapFailure')) {
+            foreach ($marker in @('FIXTURE_LOADED', 'FIXTURE_UNLOADED')) {
+                if ([regex]::Matches($output, "(?m)^$marker`r?$").Count -ne 1) {
+                    $failures += "Expected exactly one $marker marker."
+                }
+            }
+            if ($output.IndexOf('FIXTURE_UNLOADED') -lt $output.IndexOf('FIXTURE_LOADED') -or
+                $output.IndexOf('FIXTURE_UNLOADED') -gt $output.IndexOf('BOOTSTRAP_PROBE_CAUGHT_ERROR')) {
+                $failures += 'Loaded DLL was not released before the caller caught the error.'
+            }
         }
     }
 
