@@ -5,6 +5,10 @@
 
 Swift Language Bindings for the Windows App SDK APIs
 
+On non-Windows platforms, the `WinAppSDK` and `CWinAppSDK` products build as
+empty compatibility modules. This keeps a single SwiftPM dependency graph
+portable without exposing Windows-only APIs where they cannot be used.
+
 These APIs are intendened to be used in conjuction with the following projects:
 - [swift-winui](https://github.com/thebrowsercompany/swift-winui)
 - [swift-win2d](https://github.com/thebrowsercompany/swift-win2d)

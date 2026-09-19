@@ -1,22 +1,6 @@
 // swift-tools-version: 5.10
 
 import PackageDescription
-import Foundation
-
-let currentDirectory = Context.packageDirectory
-
-let linkerSettings: [LinkerSetting] = [
-/* Figure out magic incantation so we can delay load these dlls
-    .unsafeFlags(["-L\(currentDirectory)/Sources/CWinAppSDK/nuget/lib"]),
-    .unsafeFlags(["-Xlinker" , "/DELAYLOAD:Microsoft.WindowsAppRuntime.Bootstrap.dll"]),
-*/
-]
-
-#if arch(x86_64)
-    let windowsAppRTBootstrapDll: Resource = .copy("nuget/bin/x86_64/Microsoft.WindowsAppRuntime.Bootstrap.dll")
-#elseif arch(arm64)
-    let windowsAppRTBootstrapDll: Resource = .copy("nuget/bin/arm64/Microsoft.WindowsAppRuntime.Bootstrap.dll")
-#endif
 
 let package = Package(
     name: "swift-windowsappsdk",
@@ -26,39 +10,39 @@ let package = Package(
     ],
     dependencies: [
         .package(
-            url: "https://github.com/moreSwift/swift-cwinrt",
-            .upToNextMinor(from: "0.1.0")
+            url: "https://github.com/mutle/swift-cwinrt",
+            revision: "a5988c9ec83d9ae1f1a4cd83051127f625ff60f7"
         ),
         .package(
-            url: "https://github.com/moreSwift/swift-uwp",
-            .upToNextMinor(from: "0.1.0")
+            url: "https://github.com/mutle/swift-uwp",
+            revision: "7aff869b2a6badeeaf82b9f68837f755995154e9"
         ),
         .package(
-            url: "https://github.com/moreSwift/swift-windowsfoundation",
-            .upToNextMinor(from: "0.1.0")
+            url: "https://github.com/mutle/swift-windowsfoundation",
+            revision: "a112318dc42f2031b18a7a2db5d03fc46f452449"
         ),
     ],
     targets: [
         .target(
             name: "WinAppSDK",
             dependencies: [
-                .product(name: "CWinRT", package: "swift-cwinrt"),
-                .product(name: "UWP", package: "swift-uwp"),
-                .product(name: "WindowsFoundation", package: "swift-windowsfoundation"),
-                "CWinAppSDK"
+                .product(name: "CWinRT", package: "swift-cwinrt", condition: .when(platforms: [.windows])),
+                .product(name: "UWP", package: "swift-uwp", condition: .when(platforms: [.windows])),
+                .product(name: "WindowsFoundation", package: "swift-windowsfoundation", condition: .when(platforms: [.windows])),
+                .target(name: "CWinAppSDK", condition: .when(platforms: [.windows])),
             ]
         ),
         .target(
             name: "CWinAppSDK",
             resources: [
-                windowsAppRTBootstrapDll,
-            ],
-            linkerSettings: linkerSettings
+                .copy("nuget/bin"),
+            ]
         ),
         .testTarget(
             name: "WinAppSDKTests",
             dependencies: [
                 "WinAppSDK",
+                "CWinAppSDK",
             ]
         )
     ]
