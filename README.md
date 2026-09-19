@@ -100,6 +100,12 @@ real Windows App Runtime. They do not install anything or show runtime-selection
 execute these tests only in an explicitly authorized Windows environment.
 Use an existing compiler environment targeting the same architecture as the
 probe (ARM64 or x64); do not install or switch global toolchains for this check.
+Run the positive subprocess cases in an interactive desktop session. In the
+recorded Windows environment, an otherwise identical probe in SSH session 0
+received `SetProcessDpiAwareness` access denied, while the same binary, payload,
+working directory, and environment passed in interactive session 1. Preserve
+that error when it occurs; do not weaken the initializer's DPI policy to make
+a headless test pass. Record the session context with the result.
 
 Prefer compiling the small probe source against already built, verified
 WinAppSDK modules and import libraries, reusing their recorded Swift 6.4 compiler
