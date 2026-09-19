@@ -195,8 +195,11 @@ foreach ($case in $cases) {
         if (!$case.ContainsKey('bootstrapFailure')) {
             $diagnostics += @("$resourceName.bundle", $dllName, $app)
         }
+        $normalizedErrorOutput = $errorOutput.Replace('\', '/')
         foreach ($expected in $diagnostics) {
-            if (!$errorOutput.Contains($expected)) { $failures += "Diagnostic omitted: $expected" }
+            if (!$normalizedErrorOutput.Contains($expected.Replace('\', '/'))) {
+                $failures += "Diagnostic omitted: $expected"
+            }
         }
         if ($case.ContainsKey('symbol') -and !$errorOutput.Contains($case.symbol)) {
             $failures += "Diagnostic omitted missing symbol: $($case.symbol)"
