@@ -10,7 +10,10 @@ final class BootstrapLibrary {
     ) -> HRESULT
     private typealias ShutdownFunction = @convention(c) () -> Void
 
-    static let resourceDirectory = "swift-windowsappsdk_CWinAppSDK.bundle"
+    static let resourceDirectories = [
+        "swift-windowsappsdk_CWinAppSDK.bundle",
+        "swift-windowsappsdk_CWinAppSDK.resources",
+    ]
     static let dllName = "Microsoft.WindowsAppRuntime.Bootstrap.dll"
     #if arch(arm64)
     static let architecture = "arm64"
@@ -46,14 +49,16 @@ final class BootstrapLibrary {
 
     static func candidateURLs(executableDirectory: URL, moduleDirectory: URL) -> [URL] {
         var seen = Set<String>()
-        return [executableDirectory, moduleDirectory].compactMap { directory in
-            let url = directory
-                .appendingPathComponent(resourceDirectory)
-                .appendingPathComponent("bin")
-                .appendingPathComponent(architecture)
-                .appendingPathComponent(dllName)
-                .standardizedFileURL
-            return seen.insert(url.path.lowercased()).inserted ? url : nil
+        return [executableDirectory, moduleDirectory].flatMap { directory in
+            resourceDirectories.compactMap { resourceDirectory in
+                let url = directory
+                    .appendingPathComponent(resourceDirectory)
+                    .appendingPathComponent("bin")
+                    .appendingPathComponent(architecture)
+                    .appendingPathComponent(dllName)
+                    .standardizedFileURL
+                return seen.insert(url.path.lowercased()).inserted ? url : nil
+            }
         }
     }
 

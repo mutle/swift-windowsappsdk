@@ -47,22 +47,25 @@ In order to use the Windows App SDK, you need to download the Windows App SDK fr
 
 ### Bootstrap deployment and lifetime
 
-This package targets Swift 6.4 SwiftBuild's generated resource layout:
+This package supports both generated resource layouts: SwiftBuild uses `.bundle`
+and the native SwiftPM backend uses `.resources`. The payload inside either is:
 
 ```text
-swift-windowsappsdk_CWinAppSDK.bundle/
+swift-windowsappsdk_CWinAppSDK.{bundle,resources}/
   bin/arm64/Microsoft.WindowsAppRuntime.Bootstrap.dll
   bin/x86_64/Microsoft.WindowsAppRuntime.Bootstrap.dll
 ```
 
 The DLLs are precompiled files owned by the `CWinAppSDK` target and copied by
-the build system; they are not generated Swift code. Keep the `.bundle` beside
+the build system; they are not generated Swift code. Keep the generated directory beside
 the executable, or beside the native module containing `CWinAppSDK` when deployed
-separately. The loader selects the build architecture, checks the executable's
-location first, and tries the owning module's location only if the payload is
-absent there. It does not depend on the caller's working directory, search PATH
-for the bootstrap DLL, or use legacy `.resources` folders. A present but invalid
-DLL is an error rather than a reason to silently use another copy.
+separately. The loader selects only the build architecture and checks
+executable-adjacent `.bundle`, then executable-adjacent `.resources`, before
+the owning module's `.bundle` and `.resources`. Duplicate absolute candidate
+paths are removed case-insensitively. It does not depend on the caller's working
+directory or search PATH for the bootstrap DLL. A present but invalid DLL is an
+error rather than a reason to silently use another layout or location.
+Consumers do not need to rename or copy generated resource directories.
 
 Missing payloads, failed loads, and missing bootstrap exports throw errors with
 the relevant absolute paths and native error codes. These deployment errors
@@ -86,10 +89,11 @@ install a runtime proactively, or change the checked-in bootstrap DLLs.
 ## Bootstrap loader regressions
 
 `Tests/check-bootstrap-loader.ps1` runs isolated Windows subprocess regressions
-against the public initializer. These specify Swift 6.4 SwiftBuild's `.bundle`
-layout, target-architecture selection, independence from the working directory,
-and throwing diagnostics for missing DLLs or exports. Legacy `.resources`
-folders must not be used. Export/initialization failures must unload the DLL
+against the public initializer. These cover both `.bundle` and `.resources`
+layouts, executable/module precedence, target-architecture selection,
+independence from the working directory, and throwing diagnostics for missing
+DLLs or exports. A broken preferred payload must not fall back to a later
+layout or location. Export/initialization failures must unload the DLL
 before the caller catches the error; successful lifetimes must shut down before
 unloading. An owning-module-adjacent case places `WinAppSDK.dll` and its `.bundle`
 outside the executable directory. Only that child's environment locates the
@@ -157,7 +161,7 @@ dependency, or missing diagnostic is a failure, not a successful negative test.
 These fake-DLL regressions do not replace native integration using the actual
 generated resource bundle and an already installed Windows App Runtime.
 
-`RuntimeInitializationTests` adds deterministic XCTest coverage of WinRT,
+`RuntimeInitializationTests` adds deterministic XCTest coverage of discovery order, WinRT,
 bootstrap, DPI, and installer failure paths using instance-owned fake operations.
 No real installer is launched by those tests. The existing installed-runtime
 smoke test is opt-in with `WINAPPSDK_RUN_INSTALLED_RUNTIME_TEST=1` in the test

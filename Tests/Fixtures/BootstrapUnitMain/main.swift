@@ -13,7 +13,7 @@ let tests: [(String, (RuntimeInitializationTests) -> () throws -> Void)] = [
     ("testFailedRetryDoesNotShutdown", RuntimeInitializationTests.testFailedRetryDoesNotShutdown),
     ("testSuccessfulRetryShutsDownOnceAndCloseIsIdempotent", RuntimeInitializationTests.testSuccessfulRetryShutsDownOnceAndCloseIsIdempotent),
     ("testExistingInstallerIsNotRunWhenBootstrapSucceeds", RuntimeInitializationTests.testExistingInstallerIsNotRunWhenBootstrapSucceeds),
-    ("testDiscoveryUsesOnlyBundleAndBuildArchitectureInStableOrder", RuntimeInitializationTests.testDiscoveryUsesOnlyBundleAndBuildArchitectureInStableOrder),
+    ("testDiscoverySupportsBothBuildLayoutsAndOnlyTheBuildArchitectureInStableOrder", RuntimeInitializationTests.testDiscoverySupportsBothBuildLayoutsAndOnlyTheBuildArchitectureInStableOrder),
     ("testModulePathGrowsBufferWithoutUsingTruncatedResult", RuntimeInitializationTests.testModulePathGrowsBufferWithoutUsingTruncatedResult),
     ("testModulePathFailureAndMaximumLengthAreDiagnosable", RuntimeInitializationTests.testModulePathFailureAndMaximumLengthAreDiagnosable),
 ]

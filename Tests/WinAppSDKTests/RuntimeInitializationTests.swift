@@ -224,18 +224,22 @@ final class RuntimeInitializationTests: XCTestCase {
         ])
     }
 
-    func testDiscoveryUsesOnlyBundleAndBuildArchitectureInStableOrder() {
+    func testDiscoverySupportsBothBuildLayoutsAndOnlyTheBuildArchitectureInStableOrder() {
         let executable = URL(fileURLWithPath: #"C:\app"#)
         let module = URL(fileURLWithPath: #"C:\module"#)
         let candidates = BootstrapLibrary.candidateURLs(executableDirectory: executable, moduleDirectory: module)
-        XCTAssertEqual(candidates.count, 2)
-        for (candidate, directory) in zip(candidates, [executable, module]) {
+        let locations = [
+            (executable, "bundle"), (executable, "resources"),
+            (module, "bundle"), (module, "resources"),
+        ]
+        XCTAssertEqual(candidates.count, locations.count)
+        for (candidate, location) in zip(candidates, locations) {
+            let (directory, layout) = location
             XCTAssertEqual(candidate, directory
-                .appendingPathComponent("swift-windowsappsdk_CWinAppSDK.bundle")
+                .appendingPathComponent("swift-windowsappsdk_CWinAppSDK.\(layout)")
                 .appendingPathComponent("bin")
                 .appendingPathComponent(BootstrapLibrary.architecture)
                 .appendingPathComponent("Microsoft.WindowsAppRuntime.Bootstrap.dll"))
-            XCTAssertFalse(candidate.path.contains(".resources"))
         }
         #if arch(arm64)
         XCTAssertEqual(BootstrapLibrary.architecture, "arm64")
@@ -243,7 +247,7 @@ final class RuntimeInitializationTests: XCTestCase {
         XCTAssertEqual(BootstrapLibrary.architecture, "x86_64")
         #endif
         XCTAssertEqual(
-            BootstrapLibrary.candidateURLs(executableDirectory: executable, moduleDirectory: executable).count, 1
+            BootstrapLibrary.candidateURLs(executableDirectory: executable, moduleDirectory: executable).count, 2
         )
     }
 

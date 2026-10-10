@@ -106,13 +106,18 @@ $cases = @(
     @{ name = 'bundle-different-cwd'; bundle = 'complete'; success = $true },
     @{ name = 'bundle-same-cwd'; bundle = 'complete'; success = $true; sameCwd = $true },
     @{ name = 'module-adjacent-bundle'; bundle = 'complete'; success = $true; moduleAdjacent = $true },
+    @{ name = 'resources-different-cwd'; resources = 'complete'; success = $true },
+    @{ name = 'resources-same-cwd'; resources = 'complete'; success = $true; sameCwd = $true },
+    @{ name = 'module-adjacent-resources'; resources = 'complete'; success = $true; moduleAdjacent = $true },
     @{ name = 'missing-library'; success = $false },
     @{ name = 'missing-initialize'; bundle = 'missing-initialize'; success = $false; symbol = 'MddBootstrapInitialize2'; win32 = 127 },
     @{ name = 'missing-shutdown'; bundle = 'missing-shutdown'; success = $false; symbol = 'MddBootstrapShutdown'; win32 = 127 },
     @{ name = 'bootstrap-failure-unloads'; bundle = 'initialize-fails'; success = $false; bootstrapFailure = $true },
-    @{ name = 'legacy-only-is-ignored'; legacy = 'complete'; success = $false },
-    @{ name = 'bundle-wins-over-legacy'; bundle = 'complete'; legacy = 'missing-initialize'; success = $true },
-    @{ name = 'broken-bundle-does-not-fallback'; bundle = 'invalid-image'; legacy = 'complete'; success = $false; win32 = 193 },
+    @{ name = 'bundle-wins-over-resources'; bundle = 'complete'; resources = 'missing-initialize'; success = $true },
+    @{ name = 'broken-bundle-does-not-fallback'; bundle = 'invalid-image'; resources = 'complete'; success = $false; win32 = 193 },
+    @{ name = 'broken-resources-does-not-fallback-to-module'; resources = 'invalid-image'; moduleBundle = 'complete'; success = $false; win32 = 193; diagnosticLayout = 'resources' },
+    @{ name = 'resources-missing-initialize'; resources = 'missing-initialize'; success = $false; symbol = 'MddBootstrapInitialize2'; win32 = 127; diagnosticLayout = 'resources' },
+    @{ name = 'resources-missing-shutdown'; resources = 'missing-shutdown'; success = $false; symbol = 'MddBootstrapShutdown'; win32 = 127; diagnosticLayout = 'resources' },
     @{ name = 'cwd-decoys-are-ignored'; decoy = $true; success = $false },
     @{ name = 'unicode-and-spaces'; bundle = 'complete'; success = $true; unicode = $true }
 )
@@ -123,7 +128,7 @@ foreach ($case in $cases) {
     $suffix = if ($case.ContainsKey('unicode')) { "app space $([char]0x00e9)" } else { 'app' }
     $app = (New-Item -ItemType Directory -Path (Join-Path $caseRoot $suffix) -Force).FullName
     $moduleDirectory = $app
-    if ($case.ContainsKey('moduleAdjacent')) {
+    if ($case.ContainsKey('moduleAdjacent') -or $case.ContainsKey('moduleBundle')) {
         $moduleDirectory = (New-Item -ItemType Directory -Path (Join-Path $caseRoot 'native-module')).FullName
     }
     $cwd = (New-Item -ItemType Directory -Path (Join-Path $caseRoot 'unrelated-cwd')).FullName
@@ -135,7 +140,11 @@ foreach ($case in $cases) {
         $null = New-Item -ItemType HardLink -Path (Join-Path $directory $file.Name) -Target (Join-Path $shared $file.Name)
     }
     if ($case.ContainsKey('bundle')) { Add-Payload $moduleDirectory 'bundle' $case.bundle }
-    if ($case.ContainsKey('legacy')) { Add-Payload $app 'resources' $case.legacy }
+    if ($case.ContainsKey('resources')) {
+        $resourceDirectory = if ($case.ContainsKey('moduleBundle')) { $app } else { $moduleDirectory }
+        Add-Payload $resourceDirectory 'resources' $case.resources
+    }
+    if ($case.ContainsKey('moduleBundle')) { Add-Payload $moduleDirectory 'bundle' $case.moduleBundle }
     if ($case.ContainsKey('decoy')) {
         Add-Payload $cwd 'bundle' 'complete'
         Add-Payload $cwd 'resources' 'complete'
@@ -152,7 +161,7 @@ foreach ($case in $cases) {
     $start.RedirectStandardError = $true
     $start.StandardOutputEncoding = [Text.Encoding]::UTF8
     $start.StandardErrorEncoding = [Text.Encoding]::UTF8
-    if ($case.ContainsKey('moduleAdjacent')) {
+    if ($case.ContainsKey('moduleAdjacent') -or $case.ContainsKey('moduleBundle')) {
         # Only locate the owning WinAppSDK.dll through this child's PATH, not the bootstrap payload.
         $start.EnvironmentVariables['PATH'] = "$moduleDirectory;$($start.EnvironmentVariables['PATH'])"
     }
@@ -193,7 +202,8 @@ foreach ($case in $cases) {
         if ($exitCode -ne 1) { $failures += "Expected caught error with exit 1; got $exitCode." }
         $diagnostics = @('BOOTSTRAP_PROBE_ERROR:')
         if (!$case.ContainsKey('bootstrapFailure')) {
-            $diagnostics += @("$resourceName.bundle", $dllName, $app)
+            $layout = if ($case.ContainsKey('diagnosticLayout')) { $case.diagnosticLayout } else { 'bundle' }
+            $diagnostics += @("$resourceName.$layout", $dllName, $app)
         }
         $normalizedErrorOutput = $errorOutput.Replace('\', '/')
         foreach ($expected in $diagnostics) {

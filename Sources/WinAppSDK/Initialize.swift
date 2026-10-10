@@ -23,7 +23,7 @@ enum InitializationError: LocalizedError {
                     """
             case .bootstrapNotFound(let architecture, let attempts):
                 return "Windows App Runtime bootstrap DLL not found for \(architecture). "
-                    + "Expected Swift 6.4 .bundle resources; attempted: " + attempts.joined(separator: "; ")
+                    + "Expected SwiftPM .bundle or .resources payloads; attempted: " + attempts.joined(separator: "; ")
             case .windowsAPI(let operation, let context, let code):
                 return "\(operation) failed for '\(context)' (Win32 error \(code)): \(Self.message(for: code))"
             case .runtimeFailure(let operation, let code, let detail):
